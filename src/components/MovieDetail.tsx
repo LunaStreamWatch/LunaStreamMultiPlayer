@@ -5,18 +5,12 @@ import { useParams, Link } from "react-router-dom"
 import { Play, X, ChevronLeft } from "lucide-react"
 import { tmdb } from "../services/tmdb"
 import { isBanned } from "../utils/banList"
-import { analytics } from "../services/analytics"
 import type { MovieDetails } from "../types"
 import { watchlistService } from "../services/watchlist"
 import { continueWatchingService } from "../services/continueWatching"
-import { watchStatsService } from "../services/watchStats"
 import GlobalNavbar from "./GlobalNavbar"
-import { getPlayerUrl } from "../utils/playerUtils"
-import { useLanguage } from "./LanguageContext"
-import { translations } from "../data/i18n"
 import Loading from "./Loading"
 import HybridMovieHeader from "./HybridMovieHeader"
-import EmbeddedFrame from "./player/EmbeddedFrame"
 
 
 const MovieDetail: React.FC = () => {
@@ -33,8 +27,6 @@ const MovieDetail: React.FC = () => {
   const [cast, setCast] = useState<
     { id: number; name: string; character: string; profile_path: string | null; gender?: number }[]
   >([])
-  const { language } = useLanguage()
-  const t = translations[language]
 
   useEffect(() => {
     const checkFavorite = async () => {
@@ -134,19 +126,6 @@ const MovieDetail: React.FC = () => {
       release_date: movie.release_date,
       vote_average: movie.vote_average,
     })
-
-    watchStatsService.recordWatch()
-
-    const newSessionId = analytics.startSession(
-      "movie",
-      parseInt(id),
-      movie.title,
-      movie.poster_path,
-      undefined,
-      undefined,
-      movie.runtime ? movie.runtime * 60 : undefined
-    )
-    setSessionId(newSessionId)
     document.body.classList.add('player-active')
     setIsPlaying(true)
 
@@ -168,7 +147,6 @@ const MovieDetail: React.FC = () => {
   const handleClosePlayer = () => {
     if (sessionId) {
       const finalTime = Math.random() * (movie?.runtime ? movie.runtime * 60 : 7200)
-      analytics.endSession(sessionId, finalTime)
       setSessionId(null)
     }
     document.body.classList.remove('player-active')
@@ -185,7 +163,6 @@ const MovieDetail: React.FC = () => {
       if (Math.random() > 0.99) additionalData.bufferingEvents = 1
       if (Math.random() > 0.9) additionalData.isFullscreen = Math.random() > 0.5
 
-      analytics.updateSession(sessionId, currentTime, additionalData)
     }, 30000)
 
     return () => clearInterval(interval)
@@ -226,15 +203,16 @@ const MovieDetail: React.FC = () => {
           <button
             onClick={handleClosePlayer}
             className="text-white hover:text-gray-300"
-            aria-label={t.close_player || "Close Player"}
+            aria-label="Close Player"
           >
             <X className="w-8 h-8" />
           </button>
         </div>
-        <EmbeddedFrame
-          src={getPlayerUrl("vidify", { tmdbId: id!, mediaType: "movie" })}
+        <iframe
+          src={`https://vidify.cc/embed/movie/${id}`}
           className="fixed top-0 left-0 w-full h-full border-0"
           title={movie.title}
+          allowFullScreen
         />
       </div>
     )

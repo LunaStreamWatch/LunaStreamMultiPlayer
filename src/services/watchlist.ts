@@ -1,4 +1,3 @@
-import { supabase } from '../lib/supabase';
 
 export interface WatchlistMovie {
   id: number;

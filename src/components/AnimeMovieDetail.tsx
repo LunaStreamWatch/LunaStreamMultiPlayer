@@ -3,14 +3,9 @@
 import React, { useState, useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
 import { Play, X, ChevronLeft } from "lucide-react"
-import { getPlayerUrl } from "../utils/playerUtils"
 import { anilist, Anime } from "../services/anilist"
-import { analytics } from "../services/analytics"
 import { continueWatchingService } from "../services/continueWatching"
-import { watchStatsService } from "../services/watchStats"
 import GlobalNavbar from "./GlobalNavbar"
-import { useLanguage } from "./LanguageContext"
-import { translations } from "../data/i18n"
 import Loading from "./Loading"
 import { useIsMobile } from "../hooks/useIsMobile"
 import HybridAnimeMovieHeader from "./HybridAnimeMovieHeader"
@@ -21,11 +16,8 @@ const AnimeMovieDetail: React.FC = () => {
   const [anime, setAnime] = useState<Anime | null>(null)
   const [loading, setLoading] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [sessionId, setSessionId] = useState<string | null>(null)
   const [isFavorited, setIsFavorited] = useState(false)
   const [isDub, setIsDub] = useState<boolean>(false)
-  const { language } = useLanguage()
-  const t = translations[language]
   const isMobile = useIsMobile()
 
   useEffect(() => {
@@ -84,32 +76,16 @@ const AnimeMovieDetail: React.FC = () => {
       progress: 0
     });
 
-    watchStatsService.recordWatch()
 
     const movieDuration = anime.duration
       ? anime.duration * 60
       : 120 * 60
 
-    const newSessionId = analytics.startSession(
-      "movie",
-      parseInt(id),
-      anilist.getDisplayTitle(anime),
-      null,
-      undefined,
-      undefined,
-      movieDuration
-    )
-    setSessionId(newSessionId)
     document.body.classList.add('player-active')
     setIsPlaying(true)
   }
 
   const handleClosePlayer = () => {
-    if (sessionId) {
-      const finalTime = Math.random() * (anime?.duration ? anime.duration * 60 : 7200)
-      analytics.endSession(sessionId, finalTime)
-      setSessionId(null)
-    }
     document.body.classList.remove('player-active')
     setIsPlaying(false)
   }

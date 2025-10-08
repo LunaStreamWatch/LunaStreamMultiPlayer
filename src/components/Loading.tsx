@@ -1,8 +1,6 @@
 import React from "react"
 import { useLocation } from "react-router-dom"
 import { Film, Tv } from "lucide-react"
-import { translations } from "../data/i18n"
-import { useLanguage } from "./LanguageContext"
 
 interface LoadingProps {
   message?: string
@@ -13,8 +11,6 @@ const Loading: React.FC<LoadingProps> = ({ message }) => {
   const path = location.pathname
   const Icon = path.startsWith("/tv") ? Tv : Film
 
-  const { language } = useLanguage()
-  const t = translations[language] || translations.en
   const displayMessage = message || t.status_loading
 
   return (

@@ -6,9 +6,7 @@ import GlobalNavbar from './GlobalNavbar';
 import { filterBannedContent } from '../utils/banList';
 import { useIsMobile } from '../hooks/useIsMobile';
 
-import { languages, translations } from '../data/i18n'
 
-import { useLanguage } from "./LanguageContext"
 
 interface Genre {
   id: number;
@@ -54,7 +52,6 @@ const Discover: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const { language, setLanguage } = useLanguage()
-  const t = translations[language] || translations.en
   const isMobile = useIsMobile()
 
   // State and ref for pagination input

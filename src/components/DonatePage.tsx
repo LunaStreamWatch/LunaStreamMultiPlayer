@@ -2,14 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Film, Heart, Copy, Check, Bitcoin, Coins, DollarSign, Shield } from 'lucide-react';
 import GlobalNavbar from './GlobalNavbar';
-import { useLanguage } from './LanguageContext';
-import { translations } from '../data/i18n';
 import { useIsMobile } from '../hooks/useIsMobile';
 
 const DonatePage: React.FC = () => {
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
-  const { language } = useLanguage();
-  const t = translations[language] || translations.en;
   const isMobile = useIsMobile();
 
   const cryptoAddresses = [

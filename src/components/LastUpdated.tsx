@@ -2,12 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Film } from 'lucide-react';
 import GlobalNavbar from './GlobalNavbar';
-import { useLanguage } from './LanguageContext';
-import { translations } from '../data/i18n';
 
 const LastUpdated: React.FC = () => {
-  const { language } = useLanguage();
-  const t = translations[language] || translations.en;
   const lastUpdated = new Date(document.lastModified);
   const localTime = lastUpdated.toLocaleString();
 

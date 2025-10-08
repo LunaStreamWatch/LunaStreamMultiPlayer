@@ -3,8 +3,6 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Search, TrendingUp, Star, ArrowLeft, ArrowRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { anilist, Anime } from '../services/anilist';
 import GlobalNavbar from './GlobalNavbar';
-import { useLanguage } from './LanguageContext';
-import { translations } from '../data/i18n';
 import { useIsMobile } from '../hooks/useIsMobile';
 import Loading from './Loading';
 
@@ -104,8 +102,6 @@ const AnimeSection: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const navigate = useNavigate();
-  const { language } = useLanguage();
-  const t = translations[language] || translations.en;
   const isMobile = useIsMobile();
   const hasSearched = !!initialQuery;
 

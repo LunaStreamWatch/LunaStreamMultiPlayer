@@ -3,14 +3,9 @@
 import React, { useState, useEffect, useMemo } from "react"
 import { useParams, Link } from "react-router-dom"
 import { Play, X, ChevronLeft } from "lucide-react"
-import { getPlayerUrl } from "../utils/playerUtils"
 import { anilist, Anime } from "../services/anilist"
-import { analytics } from "../services/analytics"
 import { continueWatchingService } from "../services/continueWatching"
-import { watchStatsService } from "../services/watchStats"
 import GlobalNavbar from "./GlobalNavbar"
-import { useLanguage } from "./LanguageContext"
-import { translations } from "../data/i18n"
 import Loading from "./Loading"
 import { useIsMobile } from "../hooks/useIsMobile"
 import HybridAnimeTVHeader from "./HybridAnimeTVHeader"
@@ -22,7 +17,6 @@ const AnimeTVDetail: React.FC = () => {
   const [loading, setLoading] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentEpisode, setCurrentEpisode] = useState<number>(1)
-  const [sessionId, setSessionId] = useState<string | null>(null)
   const [isFavorited, setIsFavorited] = useState(false)
   const [selectedSeason, setSelectedSeason] = useState(0)
   const [isDub, setIsDub] = useState<boolean>(false)
@@ -35,8 +29,6 @@ const AnimeTVDetail: React.FC = () => {
       .map(edge => edge.node) || []
   }, [anime])
 
-  const { language } = useLanguage()
-  const t = translations[language]
   const isMobile = useIsMobile()
 
   useEffect(() => {
@@ -137,30 +129,13 @@ const AnimeTVDetail: React.FC = () => {
 
     if (!currentAnime) return
 
-    watchStatsService.recordWatch()
 
     const episodeDuration = currentAnime.duration ? currentAnime.duration * 60 : 24 * 60
-    const newSessionId = analytics.startSession(
-      "tv",
-      currentAnime.id,
-      anilist.getDisplayTitle(currentAnime),
-      anime.bannerImage,
-      1,
-      episodeNumber,
-      episodeDuration
-    )
-    setSessionId(newSessionId)
     document.body.classList.add('player-active')
     setIsPlaying(true)
   }
 
   const handleClosePlayer = () => {
-    if (sessionId) {
-      const episodeDuration = anime?.duration ? anime.duration * 60 : 24 * 60
-      const finalTime = Math.random() * episodeDuration
-      analytics.endSession(sessionId, finalTime)
-      setSessionId(null)
-    }
     document.body.classList.remove('player-active')
     setIsPlaying(false)
     setCurrentEpisode(1)

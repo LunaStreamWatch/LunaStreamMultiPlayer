@@ -4,8 +4,6 @@ import React, { useState, useEffect } from "react"
 import { Star, Heart, ChevronDown } from "lucide-react"
 import { tmdb } from "../services/tmdb"
 import type { TVDetails } from "../types"
-import { useLanguage } from "./LanguageContext"
-import { translations } from "../data/i18n"
 
 interface HybridTVHeaderProps {
   show: TVDetails
@@ -24,8 +22,6 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
 }) => {
   const [seasonDetails, setSeasonDetails] = useState<any | null>(null)
   const [loading, setLoading] = useState(false)
-  const { language } = useLanguage()
-  const t = translations[language]
 
   const [dropdownOpen, setDropdownOpen] = useState(false)
 

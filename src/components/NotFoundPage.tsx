@@ -1,12 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import GlobalNavbar from './GlobalNavbar';
-import { useLanguage } from './LanguageContext';
-import { translations } from '../data/i18n';
 
 function NotFoundPage() {
   const canvasRef = useRef(null);
-  const { language } = useLanguage();
-  const t = translations[language] || translations.en;
 
   useEffect(() => {
     const canvas = canvasRef.current;

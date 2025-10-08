@@ -1,4 +1,3 @@
-import { supabase } from '../lib/supabase';
 
 export interface ContinueWatchingItem {
   id: string;
@@ -21,23 +20,32 @@ class ContinueWatchingService {
   private readonly MAX_ITEMS = 10;
 
   private async isAuthenticated(): Promise<boolean> {
-    const { data: { user } } = await supabase.auth.getUser();
     return !!user;
   }
 
   async getContinueWatchingItems(): Promise<ContinueWatchingItem[]> {
     if (await this.isAuthenticated()) {
-      const { data, error } = await supabase
-        .from('continue_watching')
-        .select('*')
-        .order('last_watched', { ascending: false })
-        .limit(this.MAX_ITEMS);
+      return [];
+    } else {
+      return this.getLocalContinueWatching();
+    }
+  }
 
-      if (error) {
-        console.error('Error fetching continue watching items:', error);
-        return [];
-      }
+  private getLocalContinueWatching(): ContinueWatchingItem[] {
+    try {
+      const stored = localStorage.getItem('continueWatching');
+      if (!stored) return [];
+      const items: ContinueWatchingItem[] = JSON.parse(stored);
+      return items.sort((a, b) => b.lastWatched - a.lastWatched).slice(0, this.MAX_ITEMS);
+    } catch (error) {
+      console.error('Error loading continue watching from localStorage:', error);
+      return [];
+    }
+  }
 
+  private OLD_getContinueWatchingItems_disabled(): void {
+    if (false) {
+      const data = [] as any[];
       return data.map(item => ({
         id: item.id,
         type: item.content_type,
@@ -67,60 +75,6 @@ class ContinueWatchingService {
   }
 
   async addOrUpdateItem(item: Omit<ContinueWatchingItem, 'id' | 'lastWatched'>): Promise<void> {
-    if (await this.isAuthenticated()) {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-
-      const id = this.generateId(item);
-
-      const { data: existing } = await supabase
-        .from('continue_watching')
-        .select('id')
-        .eq('content_type', item.type)
-        .eq(item.tmdbId ? 'tmdb_id' : 'anilist_id', item.tmdbId || item.anilistId)
-        .maybeSingle();
-
-      if (existing) {
-        const { error } = await supabase
-          .from('continue_watching')
-          .update({
-            title: item.title,
-            poster: item.poster,
-            progress: item.progress,
-            season: item.season,
-            episode: item.episode,
-            episode_title: item.episodeTitle,
-            total_episodes: item.totalEpisodes,
-            is_dub: item.isDub,
-            last_watched: new Date().toISOString()
-          })
-          .eq('id', existing.id);
-
-        if (error) console.error('Error updating continue watching item:', error);
-      } else {
-        const { error } = await supabase
-          .from('continue_watching')
-          .insert({
-            user_id: user.id,
-            content_type: item.type,
-            tmdb_id: item.tmdbId,
-            anilist_id: item.anilistId,
-            title: item.title,
-            poster: item.poster,
-            progress: item.progress,
-            season: item.season,
-            episode: item.episode,
-            episode_title: item.episodeTitle,
-            total_episodes: item.totalEpisodes,
-            is_dub: item.isDub
-          });
-
-        if (error) console.error('Error adding continue watching item:', error);
-      }
-
-      return;
-    }
-
     try {
       const items = await this.getContinueWatchingItems();
       const id = this.generateId(item);
@@ -134,16 +88,6 @@ class ContinueWatchingService {
   }
 
   async removeItem(id: string): Promise<void> {
-    if (await this.isAuthenticated()) {
-      const { error } = await supabase
-        .from('continue_watching')
-        .delete()
-        .eq('id', id);
-
-      if (error) console.error('Error removing continue watching item:', error);
-      return;
-    }
-
     try {
       const items = await this.getContinueWatchingItems();
       const filteredItems = items.filter(item => item.id !== id);
@@ -154,16 +98,6 @@ class ContinueWatchingService {
   }
 
   async clearAll(): Promise<void> {
-    if (await this.isAuthenticated()) {
-      const { error } = await supabase
-        .from('continue_watching')
-        .delete()
-        .neq('id', '00000000-0000-0000-0000-000000000000');
-
-      if (error) console.error('Error clearing continue watching:', error);
-      return;
-    }
-
     try {
       localStorage.removeItem(this.STORAGE_KEY);
     } catch (error) {

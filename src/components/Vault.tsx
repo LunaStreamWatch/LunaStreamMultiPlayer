@@ -5,9 +5,7 @@ import { watchlistService, WatchlistMovie, WatchlistTVShow } from '../services/w
 import { tmdb } from '../services/tmdb';
 import GlobalNavbar from './GlobalNavbar';
 
-import { languages, translations } from '../data/i18n'
 
-import { useLanguage } from "./LanguageContext"
 
 type CombinedItem =
   | { type: 'movie'; data: WatchlistMovie; lastActivity: number }
@@ -24,7 +22,6 @@ const Vault: React.FC = () => {
   const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
 
   const { language, setLanguage } = useLanguage()
-  const t = translations[language] || translations.en
 
   const loadData = async () => {
     setLoading(true);

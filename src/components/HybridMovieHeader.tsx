@@ -3,8 +3,6 @@
 import React from "react"
 import { Heart, Star } from "lucide-react"
 import { tmdb } from "../services/tmdb"
-import { useLanguage } from "./LanguageContext"
-import { translations } from "../data/i18n"
 
 interface HybridMovieHeaderProps {
   show: any // Replace with your actual type if available
@@ -17,8 +15,6 @@ const HybridMovieHeader: React.FC<HybridMovieHeaderProps> = ({
   isFavorited,
   onToggleFavorite,
 }) => {
-  const { language } = useLanguage()
-  const t = translations[language]
 
   return (
     <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 via-purple-900 to-pink-900">

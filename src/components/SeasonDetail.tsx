@@ -2,14 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Play, Calendar, Info, Star, Tv, Grid2x2 as Grid, X } from 'lucide-react';
 import { tmdb } from '../services/tmdb';
-import { analytics } from '../services/analytics';
 import { watchlistService } from '../services/watchlist';
 import { continueWatchingService } from '../services/continueWatching';
 import GlobalNavbar from './GlobalNavbar';
-import { playerConfigs, getPlayerUrl } from '../utils/playerUtils';
-import EmbeddedFrame from './player/EmbeddedFrame';
-import { useLanguage } from './LanguageContext';
-import { translations } from '../data/i18n';
 import Loading from './Loading';
 import { useIsMobile } from '../hooks/useIsMobile';
 
@@ -45,8 +40,6 @@ const SeasonDetail: React.FC = () => {
   const [showDescriptions, setShowDescriptions] = useState<{ [key: number]: boolean }>({});
   const [seasonCast, setSeasonCast] = useState<any[]>([]);
   
-  const { language } = useLanguage();
-  const t = translations[language];
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -97,34 +90,14 @@ const SeasonDetail: React.FC = () => {
       vote_average: show.vote_average,
     });
 
-    const episodeDuration = show.episode_run_time && show.episode_run_time.length > 0 
-      ? show.episode_run_time[0] * 60 
+    const episodeDuration = show.episode_run_time && show.episode_run_time.length > 0
+      ? show.episode_run_time[0] * 60
       : 45 * 60;
-
-    const newSessionId = analytics.startSession(
-      'tv',
-      parseInt(id),
-      show.name,
-      show.poster_path,
-      episode.season_number,
-      episode.episode_number,
-      episodeDuration
-    );
-
-    setSessionId(newSessionId);
     setCurrentEpisode(episode);
     setIsPlaying(true);
   };
 
   const handleClosePlayer = () => {
-    if (sessionId) {
-      const episodeDuration = show?.episode_run_time && show.episode_run_time.length > 0 
-        ? show.episode_run_time[0] * 60 
-        : 45 * 60;
-      const finalTime = Math.random() * episodeDuration;
-      analytics.endSession(sessionId, finalTime);
-      setSessionId(null);
-    }
     setIsPlaying(false);
     setCurrentEpisode(null);
   };
@@ -158,28 +131,20 @@ const SeasonDetail: React.FC = () => {
   if (isPlaying && currentEpisode) {
     return (
       <div className="fixed inset-0 bg-black z-50">
-        {/* Close button */}
         <div className="absolute top-6 right-6 z-10">
           <button
             onClick={handleClosePlayer}
             className="text-white hover:text-gray-300 transition-colors"
-            aria-label={translations[language].close_player || "Close Player"}
+            aria-label="Close Player"
           >
             <X className="w-8 h-8" />
           </button>
         </div>
-
-
-        {/* Player iframe */}
-        <EmbeddedFrame
-          src={getPlayerUrl("vidify", { 
-            tmdbId: id!, 
-            mediaType: "tv", 
-            seasonNumber: currentEpisode.season_number, 
-            episodeNumber: currentEpisode.episode_number 
-          })}
+        <iframe
+          src={`https://vidify.cc/embed/tv/${id}/${currentEpisode.season_number}/${currentEpisode.episode_number}`}
           className="fixed top-0 left-0 w-full h-full border-0"
           title={`${show.name} - S${currentEpisode.season_number}E${currentEpisode.episode_number}`}
+          allowFullScreen
         />
       </div>
     );

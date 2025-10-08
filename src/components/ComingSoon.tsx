@@ -4,8 +4,6 @@ import { tmdb } from '../services/tmdb';
 import { Link } from 'react-router-dom';
 import GlobalNavbar from './GlobalNavbar';
 import { filterBannedContent } from '../utils/banList';
-import { useLanguage } from './LanguageContext';
-import { translations } from '../data/i18n';
 import { useIsMobile } from '../hooks/useIsMobile';
 
 interface MediaItem {
@@ -31,8 +29,6 @@ const ComingSoon: React.FC = () => {
   const [inputPage, setInputPage] = useState<string>('1');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
-  const { language } = useLanguage();
-  const t = translations[language] || translations.en;
   const isMobile = useIsMobile();
 
   // Fetch all pages of movies and TV shows on mount

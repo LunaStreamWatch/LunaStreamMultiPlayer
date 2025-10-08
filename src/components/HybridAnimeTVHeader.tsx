@@ -3,8 +3,6 @@
 import React from "react"
 import { Star, Heart, Clock, Users } from "lucide-react"
 import { anilist, Anime } from "../services/anilist"
-import { useLanguage } from "./LanguageContext"
-import { translations } from "../data/i18n"
 
 interface HybridAnimeTVHeaderProps {
   anime: Anime
@@ -30,8 +28,6 @@ const HybridAnimeTVHeader: React.FC<HybridAnimeTVHeaderProps> = ({
   selectedSeason,
   onSeasonChange,
 }) => {
-  const { language } = useLanguage()
-  const t = translations[language] || translations.en
 
   const displayTitle = anilist.getDisplayTitle(anime)
   const year = anilist.getYear(anime)

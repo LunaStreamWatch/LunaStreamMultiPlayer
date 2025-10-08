@@ -3,8 +3,6 @@
 import React from "react"
 import { Heart, Star, Clock, Calendar, Users } from "lucide-react"
 import { anilist, Anime } from "../services/anilist"
-import { useLanguage } from "./LanguageContext"
-import { translations } from "../data/i18n"
 
 interface HybridAnimeMovieHeaderProps {
   anime: Anime
@@ -17,8 +15,6 @@ const HybridAnimeMovieHeader: React.FC<HybridAnimeMovieHeaderProps> = ({
   isFavorited,
   onToggleFavorite,
 }) => {
-  const { language } = useLanguage()
-  const t = translations[language] || translations.en
 
   const displayTitle = anilist.getDisplayTitle(anime)
   const year = anilist.getYear(anime)

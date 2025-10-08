@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Play, X, Clock, ChevronRight } from 'lucide-react';
-import { getPlayerUrl } from '../utils/playerUtils';
 import { continueWatchingService, ContinueWatchingItem } from '../services/continueWatching';
-import { watchStatsService } from '../services/watchStats';
-import { useLanguage } from './LanguageContext';
-import { translations } from '../data/i18n';
 import { useIsMobile } from '../hooks/useIsMobile';
 
 const ContinueWatching: React.FC = () => {
   const [items, setItems] = useState<ContinueWatchingItem[]>([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentItem, setCurrentItem] = useState<ContinueWatchingItem | null>(null);
-  const { language } = useLanguage();
-  const t = translations[language] || translations.en;
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -26,7 +20,6 @@ const ContinueWatching: React.FC = () => {
   };
 
   const handleContinueWatching = (item: ContinueWatchingItem) => {
-    watchStatsService.recordWatch();
 
     document.body.classList.add('player-active');
     setCurrentItem(item);

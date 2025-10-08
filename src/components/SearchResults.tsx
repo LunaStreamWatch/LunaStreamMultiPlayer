@@ -7,8 +7,6 @@ import { Movie, TVShow } from '../types';
 import GlobalNavbar from './GlobalNavbar';
 import MobileSearchResults from './SearchResultsMobile';
 import * as useIsMobile from '../hooks/useIsMobile';
-import { translations } from '../data/i18n';
-import { useLanguage } from "./LanguageContext";
 
 type MediaItem = (Movie | TVShow) & { media_type: 'movie' | 'tv'; popularity: number };
 
@@ -58,8 +56,6 @@ const SearchResults: React.FC = () => {
   const startIdx = (currentPage - 1) * resultsPerPage;
   const paginatedResults = results.slice(startIdx, startIdx + resultsPerPage);
 
-  const { language } = useLanguage();
-  const t = translations[language] || translations.en;
   const isMobile = useIsMobile.useIsMobile();
   const activeFetchId = useRef(0);
 

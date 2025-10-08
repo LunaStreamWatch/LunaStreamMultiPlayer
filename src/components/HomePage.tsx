@@ -7,9 +7,7 @@ import type { Movie, TVShow } from "../types"
 import GlobalNavbar from "./GlobalNavbar"
 import ContinueWatching from "./ContinueWatching"
 import { filterBannedContent } from "../utils/banList"
-import { languages, translations } from '../data/i18n'
 
-import { useLanguage } from "./LanguageContext"
 import { watchlistService } from "../services/watchlist"
 
 const HomePage: React.FC = () => {
@@ -23,7 +21,6 @@ const HomePage: React.FC = () => {
   const [showAllFaves, setShowAllFaves] = React.useState(false)
 
   const { language, setLanguage } = useLanguage()
-  const t = translations[language] || translations.en
 
   const [recentlyViewedMovies, setRecentlyViewedMovies] = useState<any[]>([])
   const [recentlyViewedTVEpisodes, setRecentlyViewedTVEpisodes] = useState<{

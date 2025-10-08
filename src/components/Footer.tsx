@@ -1,10 +1,6 @@
 import React from 'react';
-import { useLanguage } from './LanguageContext';
-import { translations } from '../data/i18n';
 
 const Footer: React.FC = () => {
-  const { language } = useLanguage();
-  const t = translations[language] || translations.en;
   
   return (
     <div
