@@ -194,7 +194,7 @@ const PlayerSelector: React.FC<PlayerSelectorProps> = ({
           </button>
 
           {isDropdownOpen && (
-            <div className="absolute top-full mt-2 right-0 bg-gray-900 rounded-lg shadow-xl overflow-hidden min-w-[160px] border border-gray-700">
+            <div className="absolute top-full mt-2 right-0 bg-gray-900 rounded-lg shadow-xl overflow-y-auto max-h-[400px] min-w-[140px] border border-gray-700">
               {players.map((player) => (
                 <button
                   key={player.id}
@@ -202,7 +202,7 @@ const PlayerSelector: React.FC<PlayerSelectorProps> = ({
                     setSelectedPlayer(player.id);
                     setIsDropdownOpen(false);
                   }}
-                  className={`w-full text-left px-4 py-3 hover:bg-gray-800 transition-colors ${
+                  className={`w-full text-left px-3 py-2 text-sm hover:bg-gray-800 transition-colors ${
                     selectedPlayer === player.id
                       ? 'bg-gradient-to-r from-[rgb(251,201,255)] to-[rgb(219,151,226)] text-white'
                       : 'text-gray-300'
