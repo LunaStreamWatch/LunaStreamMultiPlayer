@@ -61,7 +61,7 @@ const HybridMovieHeader: React.FC<HybridMovieHeaderProps> = ({
                   ? "text-blue-500 bg-blue-500/20"
                   : "hover:bg-blue-500/20 hover:text-blue-500"
               }`}
-              aria-label={t.toggle_favorite || "Toggle Favorite"}
+              aria-label="Toggle Favorite"
             >
               <Heart className="w-6 h-6" fill={isFavorited ? "currentColor" : "none"} />
             </button>
@@ -78,7 +78,7 @@ const HybridMovieHeader: React.FC<HybridMovieHeaderProps> = ({
 
           {/* Overview */}
           <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-2">{t.overview}</h3>
+            <h3 className="text-lg font-semibold mb-2">Overview</h3>
             <p className="text-gray-300 leading-relaxed">{show.overview}</p>
           </div>
         </div>

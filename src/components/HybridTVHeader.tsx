@@ -81,7 +81,7 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
     const lastEpisode = seasonEpisodes[seasonEpisodes.length - 1]?.air_date || firstEpisode
 
     return {
-      title: `${show.name} - ${t.season} ${selectedSeason}`,
+      title: `${show.name} - Season ${selectedSeason}`,
       overview: seasonDetails.overview || show.overview,
       poster: seasonDetails.poster_path || show.poster_path,
       backdrop: seasonEpisodes[0]?.still_path || show.backdrop_path,
@@ -130,7 +130,7 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
               />
               {displayData.type === "season" && (
                 <div className="absolute top-2 left-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                  {t.season} {selectedSeason}
+                  Season {selectedSeason}
                 </div>
               )}
             </div>
@@ -168,14 +168,14 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
               </div>
               <div className="text-gray-300">{displayData.year}</div>
               <div className="text-gray-300">
-                {displayData.episodeCount} {t.episodes}
+                {displayData.episodeCount} Episodes
               </div>
             </div>
 
             {/* Season Selector */}
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-300 mb-2">
-                {t.select_season}
+                Select Season
               </label>
               <div className="relative w-full md:w-64 season-dropdown overflow-visible z-30">
                 <button
@@ -183,7 +183,7 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
                   className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white text-left focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center"
                 >
                   <span>
-                    {selectedSeason === 0 ? "Show Overview" : `${t.season} ${selectedSeason}`}
+                    {selectedSeason === 0 ? "Show Overview" : `Season ${selectedSeason}`}
                   </span>
                   <ChevronDown className="w-4 h-4 text-white opacity-70" />
                 </button>
@@ -212,7 +212,7 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
                           selectedSeason === season.season_number ? "bg-white/10" : ""
                         }`}
                       >
-                        {t.season} {season.season_number}
+                        Season {season.season_number}
                       </li>
                     ))}
                   </ul>
@@ -224,8 +224,8 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-white mb-2">
                 {displayData.type === "season"
-                  ? `${t.season} ${selectedSeason} ${t.overview}`
-                  : t.overview}
+                  ? `Season ${selectedSeason} Overview`
+                  : "Overview"}
               </h3>
               <p className="text-gray-300 leading-relaxed">{displayData.overview}</p>
             </div>

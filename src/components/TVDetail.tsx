@@ -258,7 +258,7 @@ const TVDetail: React.FC = () => {
   }
 
   if (loading) {
-    return <Loading message={t.status_loading_show_details || 'Loading show details...'} />
+    return <Loading message='Loading show details...' />
   }
 
   if (!show) {
@@ -266,13 +266,13 @@ const TVDetail: React.FC = () => {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900 flex items-center justify-center transition-colors duration-300">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
-            {t.tv_not_found || 'Show not found'}
+            Show not found
           </h2>
           <Link
             to="/"
             className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-pink-300 transition-colors"
           >
-            {t.error_404_go_home}
+            Go Home
           </Link>
         </div>
       </div>
@@ -325,12 +325,12 @@ const TVDetail: React.FC = () => {
 
         {/* Cast Overview */}
         <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm mobile-card rounded-2xl shadow-xl border border-purple-200/50 dark:border-gray-700/50 overflow-hidden mb-8 transition-colors duration-300">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white px-8 pt-8 mb-4">{t.cast_overview || 'Cast Overview'}</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white px-8 pt-8 mb-4">Cast Overview</h2>
           <div className="flex flex-wrap gap-6 px-8 pb-8">
             {loading ? (
-              <p className="text-gray-700 dark:text-gray-300">{t.status_loading_cast || 'Loading cast...'}</p>
+              <p className="text-gray-700 dark:text-gray-300">Loading cast...</p>
             ) : ((seasonCast.length > 0 ? seasonCast : cast).length === 0 ? (
-              <p className="text-gray-700 dark:text-gray-300">{t.status_no_cast_info || 'No cast information available.'}</p>
+              <p className="text-gray-700 dark:text-gray-300">No cast information available.</p>
             ) : (
               (seasonCast.length > 0 ? seasonCast : cast).slice(0, 12).map((actor: any) => (
                 <div key={actor.id} className="flex-shrink-0 w-28 text-center">
@@ -362,7 +362,7 @@ const TVDetail: React.FC = () => {
           {/* Adjust layout for mobile */}
           <div className={`flex items-center justify-between mb-6 ${isMobile ? "flex-col space-y-4" : ""}`}>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
-              {t.episodes || 'Episodes'}
+              Episodes
             </h2>
             <div className={`flex items-center space-x-3 ${isMobile ? "w-full justify-center" : ""}`}>
               {/* Season View Button */}
@@ -386,7 +386,7 @@ const TVDetail: React.FC = () => {
                       .filter((season: any) => season.season_number > 0)
                       .map((season: any) => (
                         <option key={season.id} value={season.season_number}>
-                          {t.season} {season.season_number}
+                          Season {season.season_number}
                         </option>
                       ))}
                   </select>
@@ -403,7 +403,7 @@ const TVDetail: React.FC = () => {
                 <Tv className="w-6 h-6 text-white" />
               </div>
               <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">
-                {t.status_loading_episodes || 'Loading episodes...'}
+                Loading episodes...
               </p>
             </div>
           ) : (
@@ -436,7 +436,7 @@ const TVDetail: React.FC = () => {
                             <button
                               onClick={() => toggleDescription(episode.id)}
                               className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors p-1"
-                              title={t.show_episode_info || 'Show episode info'}
+                              title='Show episode info'
                             >
                               <Info className="w-5 h-5" />
                             </button>
@@ -444,10 +444,10 @@ const TVDetail: React.FC = () => {
                           <button
                             onClick={() => handleWatchEpisode(episode)}
                             className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1 rounded-lg font-semibold hover:from-pink-600 hover:to-purple-700 transition-colors flex items-center space-x-2"
-                            title={t.action_watch || 'Watch'}
+                            title='Watch'
                           >
                             <Play className="w-4 h-4" />
-                            <span>{t.action_watch || 'Watch'}</span>
+                            <span>Watch</span>
                           </button>
                         </div>
                       </div>
@@ -456,7 +456,7 @@ const TVDetail: React.FC = () => {
                           {episode.air_date && (
                             <div className="flex items-center text-sm text-gray-600 dark:text-gray-300 mb-2 transition-colors duration-300">
                               <Calendar className="w-4 h-4 mr-2" />
-                              <span className="font-medium">{t.episode_aired || 'Aired'}</span>
+                              <span className="font-medium">Aired</span>
                               <span className="ml-1">{formatAirDate(episode.air_date)}</span>
                             </div>
                           )}

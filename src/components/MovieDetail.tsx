@@ -175,7 +175,7 @@ const MovieDetail: React.FC = () => {
   }
 
   if (loading) {
-    return <Loading message={t.status_loading_movie_details || "Loading movie details..."} />
+    return <Loading message="Loading movie details..." />
   }
 
   if (!movie) {
@@ -183,13 +183,13 @@ const MovieDetail: React.FC = () => {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            {t.movie_not_found || "Movie not found"}
+            Movie not found
           </h2>
           <Link
             to="/"
             className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-pink-300"
           >
-            {t.error_404_go_home}
+            Go Home
           </Link>
         </div>
       </div>
@@ -237,19 +237,19 @@ const MovieDetail: React.FC = () => {
               className="w-full flex justify-center items-center space-x-2 bg-gradient-to-r from-[var(--grad-from)] to-[var(--grad-to)] hover:opacity-95 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
             >
               <Play className="w-5 h-5" />
-              <span>{t.action_watch_movie || "Watch Movie"}</span>
+              <span>Watch Movie</span>
             </button>
             
             {/* Comments Section removed */}
           </div>
           <div className="mt-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm mobile-card rounded-2xl shadow-xl border border-blue-200/50 dark:border-gray-700/50 p-4 sm:p-8">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-              {t.cast_overview || "Cast Overview"}
+              Cast Overview
             </h2>
 
             {cast.length === 0 ? (
               <p className="text-gray-700 dark:text-gray-300">
-                {t.status_no_cast_info || "No cast information available."}
+                No cast information available.
               </p>
             ) : (
               <div className="flex flex-wrap gap-6 justify-start">
@@ -291,7 +291,7 @@ const MovieDetail: React.FC = () => {
           onClick={handleFrogBoop}
           role="button"
           tabIndex={0}
-          aria-label={t.boop_the_frog || "Boop the frog"}
+          aria-label="Boop the frog"
           onKeyDown={(e) => e.key === "Enter" && handleFrogBoop()}
         >
           <div className="flex items-center space-x-2">
@@ -302,7 +302,7 @@ const MovieDetail: React.FC = () => {
               draggable={false}
             />
             <span className="text-white font-semibold text-lg">
-              {frogBoops} {t.boops || "Boops"}
+              {frogBoops} Boops
             </span>
           </div>
         </div>

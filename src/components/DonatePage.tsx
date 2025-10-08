@@ -76,11 +76,11 @@ const DonatePage: React.FC = () => {
           </div>
           <h1 className={`font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300 ${isMobile ? 'text-2xl' : 'text-4xl sm:text-5xl'}`}>
             <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-              {t.donate_support_title}
+              Support LunaStream
             </span>
           </h1>
           <p className={`text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed transition-colors duration-300 ${isMobile ? 'text-base' : 'text-xl'}`}>
-            {t.donate_support_subtitle}
+            Your donations help keep LunaStream running and accessible for everyone.
           </p>
         </div>
 
@@ -88,23 +88,23 @@ const DonatePage: React.FC = () => {
         <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-xl border border-blue-200/50 dark:border-gray-700/50 transition-colors duration-300 ${isMobile ? 'rounded-xl p-4 mb-6' : 'rounded-2xl p-8 mb-12'}`}>
           <h2 className={`font-bold text-gray-900 dark:text-white mb-6 flex items-center transition-colors duration-300 ${isMobile ? 'text-lg' : 'text-2xl'}`}>
             <DollarSign className="w-7 h-7 mr-3 text-green-500" />
-            {t.donate_how_help_title}
+            How Your Donations Help
           </h2>
           <div className={`grid gap-6 ${isMobile ? 'grid-cols-1 gap-4' : 'md:grid-cols-2'}`}>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                <p className={`text-gray-700 dark:text-gray-300 transition-colors duration-300 ${isMobile ? 'text-sm' : ''}`}><strong>{t.donate_domain_costs}</strong> {t.donate_domain_costs_desc}</p>
+                <p className={`text-gray-700 dark:text-gray-300 transition-colors duration-300 ${isMobile ? 'text-sm' : ''}`}><strong>Domain Costs:</strong> Covers hosting and domain expenses</p>
               </div>
               <div className="flex items-start space-x-3">
                 <div className="w-2 h-2 bg-indigo-500 rounded-full mt-2 flex-shrink-0"></div>
-                <p className={`text-gray-700 dark:text-gray-300 transition-colors duration-300 ${isMobile ? 'text-sm' : ''}`}><strong>{t.donate_development}</strong> {t.donate_development_desc}</p>
+                <p className={`text-gray-700 dark:text-gray-300 transition-colors duration-300 ${isMobile ? 'text-sm' : ''}`}><strong>Development:</strong> Supports ongoing platform improvements</p>
               </div>
             </div>
             <div className={`space-y-4 ${isMobile ? 'mt-2' : ''}`}>
               <div className="flex items-start space-x-3">
                 <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                <p className={`text-gray-700 dark:text-gray-300 transition-colors duration-300 ${isMobile ? 'text-sm' : ''}`}><strong>{t.donate_accessibility}</strong> {t.donate_accessibility_desc}</p>
+                <p className={`text-gray-700 dark:text-gray-300 transition-colors duration-300 ${isMobile ? 'text-sm' : ''}`}><strong>Accessibility:</strong> Keeps the service free for everyone</p>
               </div>
             </div>
           </div>
@@ -114,10 +114,10 @@ const DonatePage: React.FC = () => {
         <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-xl border border-blue-200/50 dark:border-gray-700/50 transition-colors duration-300 ${isMobile ? 'rounded-xl p-4' : 'rounded-2xl p-8'}`}>
           <h2 className={`font-bold text-gray-900 dark:text-white mb-6 flex items-center transition-colors duration-300 ${isMobile ? 'text-lg' : 'text-2xl'}`}>
             <Bitcoin className="w-7 h-7 mr-3 text-orange-500" />
-            {t.donate_crypto_title}
+            Donate via Cryptocurrency
           </h2>
           <p className={`text-gray-600 dark:text-gray-300 mb-8 transition-colors duration-300 ${isMobile ? 'text-sm mb-4' : ''}`}>
-            {t.donate_crypto_desc}
+            We accept various cryptocurrencies. Simply copy the address and send your donation.
           </p>
           
           <div className={`grid gap-4 ${isMobile ? 'grid-cols-1 gap-3' : 'sm:grid-cols-2 lg:grid-cols-3'}`}>
@@ -157,12 +157,12 @@ const DonatePage: React.FC = () => {
                     {copiedAddress === crypto.symbol ? (
                       <>
                         <Check className={isMobile ? 'w-3 h-3' : 'w-4 h-4'} />
-                        <span>{t.donate_copied}</span>
+                        <span>Copied!</span>
                       </>
                     ) : (
                       <>
                         <Copy className={isMobile ? 'w-3 h-3' : 'w-4 h-4'} />
-                        <span>{t.donate_copy_address}</span>
+                        <span>Copy Address</span>
                       </>
                     )}
                   </button>
@@ -175,9 +175,9 @@ const DonatePage: React.FC = () => {
         {/* Thank You Message */}
         <div className={`text-center ${isMobile ? 'mt-6' : 'mt-12'}`}>
           <div className={`bg-gradient-to-r from-blue-500 to-blue-600 text-white ${isMobile ? 'rounded-xl p-4' : 'rounded-2xl p-8'}`}>
-            <h3 className={`font-bold mb-4 ${isMobile ? 'text-lg' : 'text-2xl'}`}>{t.donate_thank_you_title}</h3>
+            <h3 className={`font-bold mb-4 ${isMobile ? 'text-lg' : 'text-2xl'}`}>Thank You!</h3>
             <p className={`opacity-90 max-w-2xl mx-auto ${isMobile ? 'text-sm' : 'text-lg'}`}>
-              {t.donate_thank_you_message}
+              Every contribution, no matter how small, makes a significant difference in keeping LunaStream alive and thriving. Thank you for your support!
             </p>
           </div>
         </div>

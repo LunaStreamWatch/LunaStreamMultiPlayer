@@ -11,7 +11,7 @@ const Loading: React.FC<LoadingProps> = ({ message }) => {
   const path = location.pathname
   const Icon = path.startsWith("/tv") ? Tv : Film
 
-  const displayMessage = message || t.status_loading
+  const displayMessage = message || "Loading..."
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 flex items-center justify-center transition-colors duration-300">
