@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, ChevronDown } from 'lucide-react';
 
 interface PlayerSelectorProps {
@@ -10,7 +10,7 @@ interface PlayerSelectorProps {
   onClose: () => void;
 }
 
-type PlayerType = 'videasy' | 'vidify' | 'vidplus' | 'vidfast';
+type PlayerType = 'videasy' | 'vidify' | 'vidplus' | 'vidfast' | 'vidora' | 'vidlink' | 'vidrock' | '111movies';
 
 const PlayerSelector: React.FC<PlayerSelectorProps> = ({
   tmdbId,
@@ -27,8 +27,37 @@ const PlayerSelector: React.FC<PlayerSelectorProps> = ({
     { id: 'videasy' as PlayerType, name: 'Videasy' },
     { id: 'vidify' as PlayerType, name: 'Vidify' },
     { id: 'vidplus' as PlayerType, name: 'VidPlus' },
-    { id: 'vidfast' as PlayerType, name: 'VidFast' }
+    { id: 'vidfast' as PlayerType, name: 'VidFast' },
+    { id: 'vidora' as PlayerType, name: 'Vidora' },
+    { id: 'vidlink' as PlayerType, name: 'VidLink' },
+    { id: 'vidrock' as PlayerType, name: 'VidRock' },
+    { id: '111movies' as PlayerType, name: '111Movies' }
   ];
+
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data?.type === 'MEDIA_DATA') {
+        const mediaData = event.data.data;
+        if (mediaData.id && (mediaData.type === 'movie' || mediaData.type === 'tv')) {
+          let watchProgress = JSON.parse(localStorage.getItem('watch_progress') || '{}');
+          watchProgress[mediaData.id] = {
+            ...watchProgress[mediaData.id],
+            ...mediaData,
+            last_updated: Date.now()
+          };
+          localStorage.setItem('watch_progress', JSON.stringify(watchProgress));
+        }
+      }
+
+      if (event.data?.type === 'PLAYER_EVENT') {
+        const { event: eventType, currentTime, duration } = event.data.data;
+        console.log(`Player ${eventType} at ${currentTime}s of ${duration}s`);
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
 
   const getPlayerUrl = (): string => {
     const color = 'fbc9ff';
@@ -43,6 +72,14 @@ const PlayerSelector: React.FC<PlayerSelectorProps> = ({
           return `https://player.vidplus.to/embed/movie/${tmdbId}?primarycolor=${color}&chromecast=false&nextButton=true&autoNext=true`;
         case 'vidfast':
           return `https://vidfast.pro/movie/${tmdbId}?theme=${color}&chromecast=false&nextButton=true&autoNext=true&poster=true`;
+        case 'vidora':
+          return `https://vidora.su/movie/${tmdbId}?colour=${color}&autonextepisode=true&pausescreen=true`;
+        case 'vidlink':
+          return `https://vidlink.pro/movie/${tmdbId}?primaryColor=${color}&secondaryColor=a2a2a2&iconColor=eefdec&autoplay=false&nextbutton=true`;
+        case 'vidrock':
+          return `https://vidrock.net/movie/${tmdbId}?theme=${color}&autoplay=false&autonext=true&download=true&nextbutton=true`;
+        case '111movies':
+          return `https://111movies.com/movie/${tmdbId}`;
         default:
           return `https://player.videasy.net/movie/${tmdbId}?color=${color}&chromecast=false`;
       }
@@ -56,6 +93,14 @@ const PlayerSelector: React.FC<PlayerSelectorProps> = ({
           return `https://player.vidplus.to/embed/tv/${tmdbId}/${season}/${episode}?primarycolor=${color}&chromecast=false&nextButton=true&autoNext=true`;
         case 'vidfast':
           return `https://vidfast.pro/tv/${tmdbId}/${season}/${episode}?theme=${color}&chromecast=false&nextButton=true&autoNext=true&poster=true`;
+        case 'vidora':
+          return `https://vidora.su/tv/${tmdbId}/${season}/${episode}?colour=${color}&autonextepisode=true&pausescreen=true`;
+        case 'vidlink':
+          return `https://vidlink.pro/tv/${tmdbId}/${season}/${episode}?primaryColor=${color}&secondaryColor=a2a2a2&iconColor=eefdec&autoplay=false&nextbutton=true`;
+        case 'vidrock':
+          return `https://vidrock.net/tv/${tmdbId}/${season}/${episode}?theme=${color}&autoplay=false&autonext=true&download=true&nextbutton=true`;
+        case '111movies':
+          return `https://111movies.com/tv/${tmdbId}/${season}/${episode}`;
         default:
           return `https://player.videasy.net/tv/${tmdbId}/${season}/${episode}?color=${color}&chromecast=false`;
       }
