@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Star, Calendar, Film, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { Movie, TVShow } from '../types';
-import { translations as t } from '../services/translations';
 
 type MediaItem = (Movie | TVShow) & { media_type: 'movie' | 'tv'; popularity: number };
 
@@ -44,26 +43,26 @@ const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
   const paginatedResults = results.slice(startIdx, startIdx + resultsPerPage);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300 px-4 py-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300 px-4 py-4">
 
       {/* Warning modal */}
       {warningVisible && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[1000] flex items-center justify-center px-6">
           <div className="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-lg w-full text-center">
-            <h2 className="text-3xl font-bold mb-4 text-pink-600 dark:text-pink-400">Haiii!</h2>
-            <p className="mb-6 text-gray-700 dark:text-gray-300">{t.search_stay_safe_warning}</p>
+            <h2 className="text-3xl font-bold mb-4 text-blue-600 dark:text-blue-400">Haiii!</h2>
+            <p className="mb-6 text-gray-700 dark:text-gray-300">Please stay safe online and avoid inappropriate content.</p>
             <button
               onClick={() => setWarningVisible(false)}
-              className="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg focus:ring-4 focus:ring-pink-400"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg focus:ring-4 focus:ring-blue-400"
             >
-              {t.search_stay_safe_continue}
+              I understand, continue
             </button>
           </div>
         </div>
       )}
 
       {/* Loading & error */}
-      {loading && <p className="mt-8 text-center text-gray-600 dark:text-gray-400">{t.search_loading}</p>}
+      {loading && <p className="mt-8 text-center text-gray-600 dark:text-gray-400">Loading...</p>}
       {error && <p className="mt-8 text-center text-red-600 dark:text-red-400 font-semibold">{error}</p>}
 
       {/* Results list */}
@@ -76,7 +75,7 @@ const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
             >
               <Link
                 to={getLink(item)}
-                className="flex gap-4 p-4 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                className="flex gap-4 p-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 aria-label={`${getTitle(item)} (${getDate(item)?.slice(0, 4) || 'N/A'}) - ${item.media_type.toUpperCase()}`}
               >
                 {item.poster_path ? (
@@ -88,7 +87,7 @@ const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
                   />
                 ) : (
                   <div className="w-24 h-36 bg-gray-300 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400 text-xs rounded-md flex-shrink-0">
-                    {t.no_poster || 'No Poster'}
+                    No Poster
                   </div>
                 )}
 
@@ -130,15 +129,15 @@ const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
         </ul>
       )}
 
-      {/* Pagination and Load More Button */}
-      {(totalLocalPages > 1 || hasMore) && (
+      {/* Pagination */}
+      {totalLocalPages > 1 && (
         <div className="flex flex-col items-center justify-center mt-8 space-y-4">
-          <nav aria-label={t.pagination_label} className="flex flex-wrap justify-center gap-2">
+          <nav aria-label="Pagination" className="flex flex-wrap justify-center gap-2">
             {/* Go to First Page */}
             <button
               onClick={() => setCurrentPage(1)}
               disabled={currentPage === 1}
-              className="px-4 py-2 rounded-md bg-pink-600 text-white font-semibold hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-pink-400"
+              className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <ChevronsLeft />
             </button>
@@ -146,7 +145,7 @@ const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
             <button
               onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
               disabled={currentPage === 1}
-              className="px-4 py-2 rounded-md bg-pink-600 text-white font-semibold hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-pink-400"
+              className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <ChevronLeft />
             </button>
@@ -168,10 +167,10 @@ const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
                     key={i}
                     onClick={() => setCurrentPage(i)}
                     aria-current={currentPage === i ? 'page' : undefined}
-                    className={`px-4 py-2 rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-pink-400 ${
+                    className={`px-4 py-2 rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400 ${
                       currentPage === i
-                        ? 'bg-pink-600 text-white'
-                        : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-pink-100 dark:hover:bg-pink-900'
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-blue-100 dark:hover:bg-blue-900'
                     }`}
                   >
                     {i}
@@ -184,7 +183,7 @@ const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
             <button
               onClick={() => setCurrentPage(p => Math.min(p + 1, totalLocalPages))}
               disabled={currentPage === totalLocalPages}
-              className="px-4 py-2 rounded-md bg-pink-600 text-white font-semibold hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-pink-400"
+              className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <ChevronRight />
             </button>
@@ -192,28 +191,18 @@ const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
             <button
               onClick={() => setCurrentPage(totalLocalPages)}
               disabled={currentPage === totalLocalPages}
-              className="px-4 py-2 rounded-md bg-pink-600 text-white font-semibold hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-pink-400"
+              className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <ChevronsRight />
             </button>
           </nav>
-
-          {hasMore && (
-            <button
-              onClick={loadMoreResults}
-              disabled={loading}
-              className="px-6 py-3 rounded-md bg-purple-600 text-white font-semibold hover:bg-purple-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? 'Loading...' : 'Load More Results'}
-            </button>
-          )}
         </div>
       )}
       
       {/* No results */}
       {!loading && !error && results.length === 0 && (
         <p className="mt-12 text-center text-gray-600 dark:text-gray-400">
-          {t.search_no_results}
+          No results found
         </p>
       )}
     </div>

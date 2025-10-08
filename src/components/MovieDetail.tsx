@@ -180,14 +180,14 @@ const MovieDetail: React.FC = () => {
 
   if (!movie) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             {t.movie_not_found || "Movie not found"}
           </h2>
           <Link
             to="/"
-            className="text-pink-600 dark:text-pink-400 hover:text-pink-700 dark:hover:text-pink-300"
+            className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-pink-300"
           >
             {t.error_404_go_home}
           </Link>
@@ -219,12 +219,12 @@ const MovieDetail: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
       <GlobalNavbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="p-4 sm:p-8 flex-1 mobile-spacing">
           <div className="space-y-6">
-            <Link to={`/`} className="text-pink-600 dark:text-pink-400 hover:underline ml-1">
+            <Link to={`/`} className="text-blue-600 dark:text-blue-400 hover:underline ml-1">
               <ChevronLeft />
             </Link>
             <HybridMovieHeader
@@ -242,7 +242,7 @@ const MovieDetail: React.FC = () => {
             
             {/* Comments Section removed */}
           </div>
-          <div className="mt-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm mobile-card rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-700/50 p-4 sm:p-8">
+          <div className="mt-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm mobile-card rounded-2xl shadow-xl border border-blue-200/50 dark:border-gray-700/50 p-4 sm:p-8">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
               {t.cast_overview || "Cast Overview"}
             </h2>
@@ -287,7 +287,7 @@ const MovieDetail: React.FC = () => {
       {/* Easter Egg */}
       {movie && [816, 817, 818].includes(movie.id) && (
         <div
-          className="fixed bottom-4 right-4 z-50 flex items-center space-x-3 bg-pink-600/90 dark:bg-pink-700/90 rounded-full px-4 py-2 shadow-lg cursor-pointer"
+          className="fixed bottom-4 right-4 z-50 flex items-center space-x-3 bg-blue-600/90 dark:bg-blue-700/90 rounded-full px-4 py-2 shadow-lg cursor-pointer"
           onClick={handleFrogBoop}
           role="button"
           tabIndex={0}

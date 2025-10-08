@@ -58,8 +58,8 @@ const HybridMovieHeader: React.FC<HybridMovieHeaderProps> = ({
               onClick={onToggleFavorite}
               className={`p-2 rounded-full transition-colors ${
                 isFavorited
-                  ? "text-pink-500 bg-pink-500/20"
-                  : "hover:bg-pink-500/20 hover:text-pink-500"
+                  ? "text-blue-500 bg-blue-500/20"
+                  : "hover:bg-blue-500/20 hover:text-blue-500"
               }`}
               aria-label={t.toggle_favorite || "Toggle Favorite"}
             >

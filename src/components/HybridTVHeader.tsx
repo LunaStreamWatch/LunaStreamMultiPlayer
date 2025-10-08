@@ -129,7 +129,7 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
                 className="w-48 h-72 md:w-64 md:h-96 rounded-xl shadow-2xl transition-transform group-hover:scale-105"
               />
               {displayData.type === "season" && (
-                <div className="absolute top-2 left-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <div className="absolute top-2 left-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
                   {t.season} {selectedSeason}
                 </div>
               )}
@@ -152,8 +152,8 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
                 onClick={onToggleFavorite}
                 className={`p-2 rounded-full transition-colors ${
                   isFavorited
-                    ? "text-pink-500 bg-pink-500/20"
-                    : "text-white hover:text-pink-500 hover:bg-pink-500/20"
+                    ? "text-blue-500 bg-blue-500/20"
+                    : "text-white hover:text-blue-500 hover:bg-blue-500/20"
                 }`}
               >
                 <Heart className="w-6 h-6" fill={isFavorited ? "currentColor" : "none"} />
@@ -180,7 +180,7 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
               <div className="relative w-full md:w-64 season-dropdown overflow-visible z-30">
                 <button
                   onClick={() => setDropdownOpen((prev) => !prev)}
-                  className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white text-left focus:outline-none focus:ring-2 focus:ring-pink-500 flex justify-between items-center"
+                  className="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white text-left focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center"
                 >
                   <span>
                     {selectedSeason === 0 ? "Show Overview" : `${t.season} ${selectedSeason}`}
@@ -195,7 +195,7 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
                         onSeasonChange(0)
                         setDropdownOpen(false)
                       }}
-                      className={`px-4 py-2 text-white hover:bg-pink-500/20 cursor-pointer ${
+                      className={`px-4 py-2 text-white hover:bg-blue-500/20 cursor-pointer ${
                         selectedSeason === 0 ? "bg-white/10" : ""
                       }`}
                     >
@@ -208,7 +208,7 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
                           onSeasonChange(season.season_number)
                           setDropdownOpen(false)
                         }}
-                        className={`px-4 py-2 text-white hover:bg-pink-500/20 cursor-pointer ${
+                        className={`px-4 py-2 text-white hover:bg-blue-500/20 cursor-pointer ${
                           selectedSeason === season.season_number ? "bg-white/10" : ""
                         }`}
                       >

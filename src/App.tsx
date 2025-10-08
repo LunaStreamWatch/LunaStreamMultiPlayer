@@ -9,16 +9,12 @@ import DonatePage from './components/DonatePage';
 import CustomCursor from './components/CustomCursor';
 import NotFoundPage from './components/NotFoundPage';
 import ScrollToTopButton from './components/ScrollToTop';
-import Discover from './components/Discover';
 import Watchlist from './components/Watchlist';
 import Vault from './components/Vault'
 import ComingSoon from './components/ComingSoon';
 import Footer from './components/Footer';
 import SeasonDetail from './components/SeasonDetail';
 import EpisodeDetail from './components/EpisodeDetail';
-import AnimeSection from './components/AnimeSection';
-import AnimeMovieDetail from './components/AnimeMovieDetail';
-import AnimeTVDetail from './components/AnimeTVDetail';
 import IntroAnimation from './components/IntroAnimation';
 import { AnimationProvider } from './components/AnimationContext';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -48,12 +44,8 @@ function App() {
           <Route path="/last-updated" element={<LastUpdated />} />
           <Route path="/donate" element={<DonatePage />} />
           <Route path="/soon" element={<ComingSoon />} />
-          <Route path="/discover" element={<Discover />} />
           <Route path="/vault" element={<Vault />} />
           <Route path="/watchlist" element={<Watchlist />} />
-          <Route path="/anime" element={<AnimeSection />} />
-          <Route path="/anime/movie/:id" element={<AnimeMovieDetail />} />
-          <Route path="/anime/tv/:id" element={<AnimeTVDetail />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <footer>

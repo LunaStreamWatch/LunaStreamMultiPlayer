@@ -64,14 +64,14 @@ const DonatePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
       <GlobalNavbar />
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero Section */}
         <div className={`text-center ${isMobile ? 'mb-8' : 'mb-12'}`}>
-          <div className="w-20 h-20 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
+          <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
             <Heart className="w-10 h-10 text-white" />
           </div>
           <h1 className={`font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300 ${isMobile ? 'text-2xl' : 'text-4xl sm:text-5xl'}`}>
@@ -85,7 +85,7 @@ const DonatePage: React.FC = () => {
         </div>
 
         {/* What Donations Do */}
-        <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-xl border border-pink-200/50 dark:border-gray-700/50 transition-colors duration-300 ${isMobile ? 'rounded-xl p-4 mb-6' : 'rounded-2xl p-8 mb-12'}`}>
+        <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-xl border border-blue-200/50 dark:border-gray-700/50 transition-colors duration-300 ${isMobile ? 'rounded-xl p-4 mb-6' : 'rounded-2xl p-8 mb-12'}`}>
           <h2 className={`font-bold text-gray-900 dark:text-white mb-6 flex items-center transition-colors duration-300 ${isMobile ? 'text-lg' : 'text-2xl'}`}>
             <DollarSign className="w-7 h-7 mr-3 text-green-500" />
             {t.donate_how_help_title}
@@ -93,7 +93,7 @@ const DonatePage: React.FC = () => {
           <div className={`grid gap-6 ${isMobile ? 'grid-cols-1 gap-4' : 'md:grid-cols-2'}`}>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-pink-500 rounded-full mt-2 flex-shrink-0"></div>
+                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
                 <p className={`text-gray-700 dark:text-gray-300 transition-colors duration-300 ${isMobile ? 'text-sm' : ''}`}><strong>{t.donate_domain_costs}</strong> {t.donate_domain_costs_desc}</p>
               </div>
               <div className="flex items-start space-x-3">
@@ -111,7 +111,7 @@ const DonatePage: React.FC = () => {
         </div>
 
         {/* Cryptocurrency Addresses */}
-        <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-xl border border-pink-200/50 dark:border-gray-700/50 transition-colors duration-300 ${isMobile ? 'rounded-xl p-4' : 'rounded-2xl p-8'}`}>
+        <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-xl border border-blue-200/50 dark:border-gray-700/50 transition-colors duration-300 ${isMobile ? 'rounded-xl p-4' : 'rounded-2xl p-8'}`}>
           <h2 className={`font-bold text-gray-900 dark:text-white mb-6 flex items-center transition-colors duration-300 ${isMobile ? 'text-lg' : 'text-2xl'}`}>
             <Bitcoin className="w-7 h-7 mr-3 text-orange-500" />
             {t.donate_crypto_title}
@@ -174,7 +174,7 @@ const DonatePage: React.FC = () => {
 
         {/* Thank You Message */}
         <div className={`text-center ${isMobile ? 'mt-6' : 'mt-12'}`}>
-          <div className={`bg-gradient-to-r from-pink-500 to-purple-600 text-white ${isMobile ? 'rounded-xl p-4' : 'rounded-2xl p-8'}`}>
+          <div className={`bg-gradient-to-r from-blue-500 to-blue-600 text-white ${isMobile ? 'rounded-xl p-4' : 'rounded-2xl p-8'}`}>
             <h3 className={`font-bold mb-4 ${isMobile ? 'text-lg' : 'text-2xl'}`}>{t.donate_thank_you_title}</h3>
             <p className={`opacity-90 max-w-2xl mx-auto ${isMobile ? 'text-sm' : 'text-lg'}`}>
               {t.donate_thank_you_message}

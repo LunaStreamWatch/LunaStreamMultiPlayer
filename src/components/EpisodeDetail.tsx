@@ -140,12 +140,12 @@ const EpisodeDetail: React.FC = () => {
 
   if (!episode || !show) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             {t.episode_not_found || 'Episode not found'}
           </h2>
-          <Link to="/" className="text-pink-600 dark:text-pink-400 hover:underline">
+          <Link to="/" className="text-blue-600 dark:text-blue-400 hover:underline">
             {t.error_404_go_home}
           </Link>
         </div>
@@ -176,7 +176,7 @@ const EpisodeDetail: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
       <GlobalNavbar />
       
       <div className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 ${isMobile ? 'px-4 py-4' : ''}`}>
@@ -184,7 +184,7 @@ const EpisodeDetail: React.FC = () => {
         <div className="mb-6 space-y-2">
           <Link
             to={`/tv/${id}`}
-            className="inline-flex items-center space-x-2 text-pink-600 dark:text-pink-400 hover:text-pink-700 dark:hover:text-pink-300 transition-colors text-sm"
+            className="inline-flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-pink-300 transition-colors text-sm"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>{t.back_to_show || 'Back to Show'}</span>
@@ -199,7 +199,7 @@ const EpisodeDetail: React.FC = () => {
         </div>
 
         {/* Episode Details */}
-        <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-700/50 overflow-hidden ${isMobile ? 'rounded-xl' : ''}`}>
+        <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-blue-200/50 dark:border-gray-700/50 overflow-hidden ${isMobile ? 'rounded-xl' : ''}`}>
           {/* Episode Image */}
           {episode.still_path && (
             <div className={`w-full ${isMobile ? 'h-48' : 'h-64'} overflow-hidden`}>
@@ -219,7 +219,7 @@ const EpisodeDetail: React.FC = () => {
                   <h1 className={`font-bold text-gray-900 dark:text-white mb-2 ${isMobile ? 'text-lg' : 'text-3xl'}`}>
                     {show.name}
                   </h1>
-                  <h2 className={`font-semibold text-pink-600 dark:text-pink-400 mb-2 ${isMobile ? 'text-base' : 'text-xl'}`}>
+                  <h2 className={`font-semibold text-blue-600 dark:text-blue-400 mb-2 ${isMobile ? 'text-base' : 'text-xl'}`}>
                     {t.season} {episode.season_number}, {t.episode || 'Episode'} {episode.episode_number}
                   </h2>
                   <h3 className={`font-medium text-gray-700 dark:text-gray-300 ${isMobile ? 'text-sm' : 'text-lg'}`}>
@@ -254,7 +254,7 @@ const EpisodeDetail: React.FC = () => {
               {/* Watch Button */}
               <button
                 onClick={handleWatchEpisode}
-                className={`bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold hover:from-pink-600 hover:to-purple-700 transition-colors flex items-center space-x-2 shadow-lg ${isMobile ? 'px-4 py-2 rounded-lg text-sm' : 'px-6 py-3 rounded-xl'}`}
+                className={`bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold hover:from-pink-600 hover:to-purple-700 transition-colors flex items-center space-x-2 shadow-lg ${isMobile ? 'px-4 py-2 rounded-lg text-sm' : 'px-6 py-3 rounded-xl'}`}
               >
                 <Play className={isMobile ? 'w-4 h-4' : 'w-5 h-5'} />
                 <span>{t.action_watch}</span>

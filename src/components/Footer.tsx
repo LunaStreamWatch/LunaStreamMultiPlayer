@@ -5,12 +5,12 @@ const Footer: React.FC = () => {
   return (
     <div
       className="
-        border-t border-pink-200/50 dark:border-gray-700/50 
+        border-t border-blue-200/50 dark:border-gray-700/50 
         py-6 
         transition-colors duration-300 
         backdrop-blur-sm
         bg-gradient-to-br 
-        from-pink-100 via-purple-50 to-indigo-100 
+        from-slate-50 via-blue-50 to-slate-100 
         dark:from-gray-950 dark:via-gray-900 dark:to-gray-950
       "
     >

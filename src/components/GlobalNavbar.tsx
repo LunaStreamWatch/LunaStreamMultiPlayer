@@ -5,9 +5,7 @@ import {
   Archive,
   Home,
   Search,
-  Compass,
   Heart,
-  Flower,
   Menu,
   X,
 } from "lucide-react";
@@ -23,21 +21,19 @@ const GlobalNavbar: React.FC = () => {
   const navItems = [
     { path: "/", label: "Home", icon: Home },
     { path: "/search", label: "Search", icon: Search },
-    { path: "/anime", label: "Anime", icon: Flower },
-    { path: "/discover", label: "Discover", icon: Compass },
     { path: "/vault", label: "Vault", icon: Archive },
   ];
 
   return (
     <>
-      <nav className="bg-white/95 dark:bg-gray-950/95 backdrop-blur-md border-b border-pink-200/50 dark:border-gray-600/30 sticky top-0 z-50">
+      <nav className="bg-white/95 dark:bg-gray-950/95 backdrop-blur-md border-b border-blue-200/50 dark:border-gray-600/30 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative flex items-center h-16">
             <Link to="/" className="flex items-center space-x-2 group">
-              <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
                 <Film className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
                 LunaStream
               </span>
             </Link>
@@ -51,8 +47,8 @@ const GlobalNavbar: React.FC = () => {
                     to={item.path}
                     className={`flex items-center space-x-2 px-4 py-2 rounded-xl font-medium transition-all ${
                       isActive(item.path)
-                        ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg"
-                        : "text-gray-600 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700/50 hover:text-pink-600 dark:hover:text-pink-400"
+                        ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg"
+                        : "text-gray-600 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700/50 hover:text-blue-600 dark:hover:text-blue-400"
                     }`}
                   >
                     <Icon className="w-4 h-4" />
@@ -65,7 +61,7 @@ const GlobalNavbar: React.FC = () => {
             <div className="hidden md:flex items-center ml-auto space-x-3 z-10">
               <Link
                 to="/donate"
-                className="p-2 rounded-lg text-pink-500 hover:text-pink-600 transition flex items-center"
+                className="p-2 rounded-lg text-blue-500 hover:text-blue-600 transition flex items-center"
                 title="Donate"
               >
                 <Heart className="w-5 h-5" />
@@ -114,7 +110,7 @@ const GlobalNavbar: React.FC = () => {
                     onClick={() => setMenuOpen(false)}
                     className={`flex items-center space-x-3 px-4 py-3 rounded-xl transition-all ${
                       isActive(item.path)
-                        ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg"
+                        ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg"
                         : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700/50"
                     }`}
                   >
@@ -129,7 +125,7 @@ const GlobalNavbar: React.FC = () => {
               <Link
                 to="/donate"
                 onClick={() => setMenuOpen(false)}
-                className="p-2 rounded-lg text-pink-500 hover:text-pink-600 transition flex items-center"
+                className="p-2 rounded-lg text-blue-500 hover:text-blue-600 transition flex items-center"
                 title="Donate"
               >
                 <Heart className="w-5 h-5" />

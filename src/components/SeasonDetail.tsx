@@ -115,12 +115,12 @@ const SeasonDetail: React.FC = () => {
 
   if (!season || !show) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             {t.season_not_found || 'Season not found'}
           </h2>
-          <Link to="/" className="text-pink-600 dark:text-pink-400 hover:underline">
+          <Link to="/" className="text-blue-600 dark:text-blue-400 hover:underline">
             {t.error_404_go_home}
           </Link>
         </div>
@@ -164,7 +164,7 @@ const SeasonDetail: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
       <GlobalNavbar />
       
       <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 ${isMobile ? 'px-4 py-4' : ''}`}>
@@ -172,7 +172,7 @@ const SeasonDetail: React.FC = () => {
         <div className="mb-6">
           <Link
             to={`/tv/${id}`}
-            className="inline-flex items-center space-x-2 text-pink-600 dark:text-pink-400 hover:text-pink-700 dark:hover:text-pink-300 transition-colors"
+            className="inline-flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-pink-300 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>{t.back_to_show || 'Back to Show'}</span>
@@ -180,7 +180,7 @@ const SeasonDetail: React.FC = () => {
         </div>
 
         {/* Season Header */}
-        <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-700/50 overflow-hidden mb-8 ${isMobile ? 'rounded-xl' : ''}`}>
+        <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-blue-200/50 dark:border-gray-700/50 overflow-hidden mb-8 ${isMobile ? 'rounded-xl' : ''}`}>
           <div className={isMobile ? 'p-4' : 'md:flex'}>
             {!isMobile && (
               <div className="md:flex-shrink-0">
@@ -205,7 +205,7 @@ const SeasonDetail: React.FC = () => {
                       <h1 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
                         {show.name}
                       </h1>
-                      <h2 className="text-lg font-semibold text-pink-600 dark:text-pink-400">
+                      <h2 className="text-lg font-semibold text-blue-600 dark:text-blue-400">
                         {season.name}
                       </h2>
                       <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
@@ -220,7 +220,7 @@ const SeasonDetail: React.FC = () => {
                     <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
                       {show.name}
                     </h1>
-                    <h2 className="text-2xl font-semibold text-pink-600 dark:text-pink-400 mb-4">
+                    <h2 className="text-2xl font-semibold text-blue-600 dark:text-blue-400 mb-4">
                       {season.name}
                     </h2>
                     <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
@@ -249,7 +249,7 @@ const SeasonDetail: React.FC = () => {
 
         {/* Cast Section */}
         {seasonCast.length > 0 && (
-          <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-700/50 p-6 mb-8 ${isMobile ? 'rounded-xl p-4' : ''}`}>
+          <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-blue-200/50 dark:border-gray-700/50 p-6 mb-8 ${isMobile ? 'rounded-xl p-4' : ''}`}>
             <h3 className={`font-bold text-gray-900 dark:text-white mb-4 ${isMobile ? 'text-lg' : 'text-2xl'}`}>
               {t.cast || 'Cast'}
             </h3>
@@ -296,7 +296,7 @@ const SeasonDetail: React.FC = () => {
         )}
 
         {/* Episodes List */}
-        <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-700/50 p-6 ${isMobile ? 'rounded-xl p-4' : ''}`}>
+        <div className={`bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-blue-200/50 dark:border-gray-700/50 p-6 ${isMobile ? 'rounded-xl p-4' : ''}`}>
           <h3 className={`font-bold text-gray-900 dark:text-white mb-6 ${isMobile ? 'text-lg mb-4' : 'text-2xl'}`}>
             {t.episodes}
           </h3>
@@ -305,7 +305,7 @@ const SeasonDetail: React.FC = () => {
             {season.episodes?.map((episode) => (
               <div
                 key={episode.id}
-                className={`group bg-gradient-to-br from-pink-50 to-purple-50 dark:from-gray-700 dark:to-gray-600 rounded-xl border border-pink-200/50 dark:border-gray-600/50 overflow-hidden hover:shadow-lg transition-all duration-300 ${isMobile ? 'rounded-lg' : ''}`}
+                className={`group bg-gradient-to-br from-pink-50 to-purple-50 dark:from-gray-700 dark:to-gray-600 rounded-xl border border-blue-200/50 dark:border-gray-600/50 overflow-hidden hover:shadow-lg transition-all duration-300 ${isMobile ? 'rounded-lg' : ''}`}
               >
                 <div className={isMobile ? 'p-3' : 'p-4'}>
                   <div className="flex items-center justify-between">
@@ -324,12 +324,12 @@ const SeasonDetail: React.FC = () => {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-1">
                           <div className="flex items-center">
-                            <span className={`bg-gradient-to-r from-pink-500 to-purple-600 text-white px-2 py-1 rounded-full font-semibold ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                            <span className={`bg-gradient-to-r from-blue-500 to-blue-600 text-white px-2 py-1 rounded-full font-semibold ${isMobile ? 'text-xs' : 'text-sm'}`}>
                               {episode.episode_number}
                             </span>
                             <Link
                               to={`/tv/${id}/season/${episode.season_number}/episode/${episode.episode_number}`}
-                              className={`font-semibold text-gray-900 dark:text-white hover:text-pink-600 dark:hover:text-pink-400 transition-colors ml-2 ${isMobile ? 'text-sm truncate' : 'text-lg'}`}
+                              className={`font-semibold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors ml-2 ${isMobile ? 'text-sm truncate' : 'text-lg'}`}
                             >
                               {episode.name}
                             </Link>
@@ -356,7 +356,7 @@ const SeasonDetail: React.FC = () => {
                             {episode.overview.length > 150 ? `${episode.overview.substring(0, 150)}...` : episode.overview}
                             <Link
                               to={`/tv/${id}/season/${episode.season_number}/episode/${episode.episode_number}`}
-                              className="text-pink-600 dark:text-pink-400 hover:underline ml-1"
+                              className="text-blue-600 dark:text-blue-400 hover:underline ml-1"
                             >
                               {t.details || 'Details'}
                             </Link>
@@ -368,7 +368,7 @@ const SeasonDetail: React.FC = () => {
                     <div className="ml-4 flex-shrink-0 flex items-center space-x-2">
                       <button
                         onClick={() => handleWatchEpisode(episode)}
-                        className={`bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold hover:from-pink-600 hover:to-purple-700 transition-colors flex items-center space-x-1 shadow-lg ${isMobile ? 'px-2 py-1 rounded-lg text-xs' : 'px-4 py-2 rounded-xl text-sm'}`}
+                        className={`bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold hover:from-pink-600 hover:to-purple-700 transition-colors flex items-center space-x-1 shadow-lg ${isMobile ? 'px-2 py-1 rounded-lg text-xs' : 'px-4 py-2 rounded-xl text-sm'}`}
                       >
                         <Play className={isMobile ? 'w-3 h-3' : 'w-4 h-4'} />
                         <span>{t.action_watch}</span>

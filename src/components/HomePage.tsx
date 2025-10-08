@@ -126,7 +126,7 @@ const HomePage: React.FC = () => {
   const showRecentlyViewed = recentlyViewedMovies.length > 0 || Object.keys(recentlyViewedTVEpisodes).length > 0
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
       <GlobalNavbar />
 
       {/* Hero & Search */}
@@ -145,9 +145,9 @@ const HomePage: React.FC = () => {
             </p>
             {/* Search with Suggestions */}
             <form onSubmit={handleSearch} className="max-w-2xl mx-auto relative px-4">
-                <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-700/50 transition-colors duration-300">
+                <div className="relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl shadow-xl border border-blue-200/50 dark:border-gray-700/50 transition-colors duration-300">
                   <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
-                    <Search className="h-5 w-5 sm:h-6 sm:w-6 text-pink-400 dark:text-purple-400 transition-colors duration-300" />
+                    <Search className="h-5 w-5 sm:h-6 sm:w-6 text-blue-500 dark:text-blue-400 transition-colors duration-300" />
                   </div>
                   <input
                     type="text"
@@ -251,8 +251,8 @@ const HomePage: React.FC = () => {
                                   <span
                                     className={`text-xs px-2 py-0.5 rounded-full font-medium ${
                                       isMovie
-                                        ? "bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300"
-                                        : "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300"
+                                        ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"
+                                        : "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300"
                                     }`}
                                   >
                                     {isMovie ? 'Movie' : 'TV Show'}
@@ -279,7 +279,7 @@ const HomePage: React.FC = () => {
                               <div className="flex-shrink-0 ml-3">
                                 <div className="w-2 h-8 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                                   <div
-                                    className="bg-gradient-to-t from-pink-500 to-purple-500 rounded-full transition-all duration-300"
+                                    className="bg-gradient-to-t from-blue-500 to-blue-600 rounded-full transition-all duration-300"
                                     style={{
                                       height: `${Math.min((item.popularity / 100) * 100, 100)}%`,
                                       width: "100%",
@@ -310,7 +310,7 @@ const HomePage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 mobile-spacing">
         {loading ? (
           <div className="text-center py-16">
-            <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full animate-spin flex items-center justify-center mb-4 shadow-lg mx-auto">
+            <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full animate-spin flex items-center justify-center mb-4 shadow-lg mx-auto">
               <TrendingUp className="w-8 h-8 text-white" />
             </div>
             <p className="text-gray-600 dark:text-gray-300 text-lg transition-colors duration-300">
@@ -322,7 +322,7 @@ const HomePage: React.FC = () => {
             {/* Trending Movies */}
             <div className="mb-12">
               <h2 className="flex items-center mb-8 text-3xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
-                <TrendingUp className="w-8 h-8 mr-3 text-pink-500" />
+                <TrendingUp className="w-8 h-8 mr-3 text-blue-500" />
                 Trending Movies
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 tablet-grid lg:grid-cols-6 gap-4 sm:gap-6">
@@ -330,7 +330,7 @@ const HomePage: React.FC = () => {
                   <Link
                     key={movie.id}
                     to={`/movie/${movie.id}`}
-                    className="group block bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm mobile-card rounded-xl shadow-lg border border-pink-200/50 dark:border-gray-700/50 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                    className="group block bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm mobile-card rounded-xl shadow-lg border border-blue-200/50 dark:border-gray-700/50 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
                   >
                     <div className="aspect-[2/3] overflow-hidden">
                       <img
@@ -340,7 +340,7 @@ const HomePage: React.FC = () => {
                       />
                     </div>
                     <div className="p-3 sm:p-4">
-                      <h3 className="font-semibold text-gray-900 dark:text-white text-xs sm:text-sm mb-2 line-clamp-2 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">
+                      <h3 className="font-semibold text-gray-900 dark:text-white text-xs sm:text-sm mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {movie.title}
                       </h3>
                       <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
@@ -359,7 +359,7 @@ const HomePage: React.FC = () => {
             {/* Trending TV Shows */}
             <div>
               <h2 className="flex items-center mb-8 text-3xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
-                <TrendingUp className="w-8 h-8 mr-3 text-purple-500" />
+                <TrendingUp className="w-8 h-8 mr-3 text-indigo-500" />
                 Trending TV Shows
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 tablet-grid lg:grid-cols-6 gap-4 sm:gap-6">
@@ -367,7 +367,7 @@ const HomePage: React.FC = () => {
                   <Link
                     key={show.id}
                     to={`/tv/${show.id}`}
-                    className="group block bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm mobile-card rounded-xl shadow-lg border border-purple-200/50 dark:border-gray-700/50 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                    className="group block bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm mobile-card rounded-xl shadow-lg border border-indigo-200/50 dark:border-gray-700/50 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
                   >
                     <div className="aspect-[2/3] overflow-hidden">
                       <img
@@ -377,7 +377,7 @@ const HomePage: React.FC = () => {
                       />
                     </div>
                     <div className="p-3 sm:p-4">
-                      <h3 className="font-semibold text-gray-900 dark:text-white text-xs sm:text-sm mb-2 line-clamp-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                      <h3 className="font-semibold text-gray-900 dark:text-white text-xs sm:text-sm mb-2 line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                         {show.name}
                       </h3>
                       <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">

@@ -113,7 +113,7 @@ const ContinueWatching: React.FC = () => {
     <div className="mb-12">
       <div className="flex items-center justify-between mb-6">
         <h2 className={`font-bold text-gray-900 dark:text-white transition-colors duration-300 ${isMobile ? 'text-xl' : 'text-3xl'}`}>
-          <Clock className={`inline mr-3 text-pink-500 ${isMobile ? 'w-6 h-6' : 'w-8 h-8'}`} />
+          <Clock className={`inline mr-3 text-blue-500 ${isMobile ? 'w-6 h-6' : 'w-8 h-8'}`} />
           {t.continue_watching || 'Continue Watching'}
         </h2>
         <button
@@ -131,7 +131,7 @@ const ContinueWatching: React.FC = () => {
         {items.map((item) => (
           <div
             key={item.id}
-            className="group block bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-pink-200/50 dark:border-gray-700/50 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
+            className="group block bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-blue-200/50 dark:border-gray-700/50 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
             onClick={() => handleContinueWatching(item)}
           >
             {/* Poster */}
@@ -147,7 +147,7 @@ const ContinueWatching: React.FC = () => {
               {item.progress && item.progress > 0 && (
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/30">
                   <div 
-                    className="h-full bg-gradient-to-r from-pink-500 to-purple-600"
+                    className="h-full bg-gradient-to-r from-blue-500 to-blue-600"
                     style={{ width: `${item.progress}%` }}
                   />
                 </div>
@@ -172,7 +172,7 @@ const ContinueWatching: React.FC = () => {
               {/* Type Badge */}
               <div className="absolute top-2 left-2">
                 <span className={`px-2 py-1 rounded-full text-xs font-medium text-white ${
-                  item.type === 'movie' ? 'bg-pink-500/90' : 
+                  item.type === 'movie' ? 'bg-blue-500/90' : 
                   item.type === 'tv' ? 'bg-purple-500/90' : 
                   'bg-indigo-500/90'
                 }`}>
@@ -185,7 +185,7 @@ const ContinueWatching: React.FC = () => {
 
             {/* Content */}
             <div className="p-4">
-              <h3 className="font-semibold text-gray-900 dark:text-white text-sm mb-2 line-clamp-2 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">
+              <h3 className="font-semibold text-gray-900 dark:text-white text-sm mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                 {item.title}
               </h3>
               
@@ -211,8 +211,8 @@ const ContinueWatching: React.FC = () => {
                 </div>
                 {item.progress && (
                   <div className="flex items-center space-x-1">
-                    <Play className="w-3 h-3 text-pink-500" />
-                    <span className="text-pink-600 dark:text-pink-400 font-medium">{formatProgress(item.progress)}</span>
+                    <Play className="w-3 h-3 text-blue-500" />
+                    <span className="text-blue-600 dark:text-blue-400 font-medium">{formatProgress(item.progress)}</span>
                   </div>
                 )}
               </div>

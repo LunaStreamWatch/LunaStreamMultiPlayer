@@ -140,7 +140,7 @@ const Vault: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-indigo-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
       <GlobalNavbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -149,7 +149,7 @@ const Vault: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-                <span className="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
                   My Vault
                 </span>
               </h1>
@@ -165,7 +165,7 @@ const Vault: React.FC = () => {
                   id="category"
                   value={categoryFilter || ''}
                   onChange={(e) => setCategoryFilter(e.target.value || null)}
-                  className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-xl border border-pink-200/50 dark:border-gray-600/30 text-gray-900 dark:text-gray-100 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all duration-200 appearance-none"
+                  className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-xl border border-blue-200/50 dark:border-gray-600/30 text-gray-900 dark:text-gray-100 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 appearance-none"
                 >
                   <option value="">All</option>
                   <option value="Movie">Movies</option>
@@ -181,7 +181,7 @@ const Vault: React.FC = () => {
                   placeholder={"Search your collection..."}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 pr-4 py-2 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-xl border border-pink-200/50 dark:border-gray-600/30 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all duration-200"
+                  className="pl-10 pr-4 py-2 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-xl border border-blue-200/50 dark:border-gray-600/30 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
                 />
               </div>
             </div>
@@ -190,7 +190,7 @@ const Vault: React.FC = () => {
 
         {/* Tab Navigation */}
         <div className="mb-8">
-          <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-600/30 p-2 transition-colors duration-300">
+          <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-blue-200/50 dark:border-gray-600/30 p-2 transition-colors duration-300">
             <div className="flex space-x-2">
               {tabs.map((tab) => {
                 const Icon = tab.icon;
@@ -200,7 +200,7 @@ const Vault: React.FC = () => {
                     onClick={() => setActiveTab(tab.id as any)}
                     className={`flex items-center space-x-2 px-4 py-2 rounded-xl font-semibold transition-all duration-200 ${
                       activeTab === tab.id
-                        ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg'
+                        ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg'
                         : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/50'
                     }`}
                   >
@@ -225,7 +225,7 @@ const Vault: React.FC = () => {
         {/* Loading State */}
         {loading && (
           <div className="flex items-center justify-center py-20">
-            <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full animate-spin flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full animate-spin flex items-center justify-center shadow-lg">
               <Archive className="w-6 h-6 text-white" />
             </div>
           </div>
@@ -254,7 +254,7 @@ const Vault: React.FC = () => {
 
                 {filteredItems.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-20">
-                    <div className="w-20 h-20 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center mb-6 shadow-xl">
+                    <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-6 shadow-xl">
                       <Play className="w-10 h-10 text-white" />
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
@@ -269,7 +269,7 @@ const Vault: React.FC = () => {
                     {!searchTerm && (
                       <Link
                         to="/"
-                        className="flex items-center space-x-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+                        className="flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
                       >
                         <ArrowLeft className="w-4 h-4" />
                         <span>Browse Content</span>
@@ -288,7 +288,7 @@ const Vault: React.FC = () => {
                       return (
                         <div
                           key={`${item.type}-${data.id}-${idx}`}
-                          className="group relative bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-lg border border-pink-200/50 dark:border-gray-600/30 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+                          className="group relative bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-lg border border-blue-200/50 dark:border-gray-600/30 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
                         >
                           <Link to={link} className="block">
                             <div className="aspect-[2/3] overflow-hidden">
@@ -301,7 +301,7 @@ const Vault: React.FC = () => {
                             </div>
                             
                             <div className="p-4">
-                              <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-sm mb-2 line-clamp-2 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">
+                              <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-sm mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                 {title}
                               </h3>
                               
@@ -321,8 +321,8 @@ const Vault: React.FC = () => {
                                   {isMovie ? "Movie" : "TV Show"}
                                 </span>
                                 <div className="flex items-center space-x-1">
-                                  <Play className="w-3 h-3 text-pink-500" />
-                                  <span className="text-xs text-pink-600 dark:text-pink-400 font-medium">Watch</span>
+                                  <Play className="w-3 h-3 text-blue-500" />
+                                  <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">Watch</span>
                                 </div>
                               </div>
                             </div>
@@ -367,7 +367,7 @@ const Vault: React.FC = () => {
 
                 {filteredFavorites.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-20">
-                    <div className="w-20 h-20 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center mb-6 shadow-xl">
+                    <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-6 shadow-xl">
                       <Heart className="w-10 h-10 text-white" />
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
@@ -382,7 +382,7 @@ const Vault: React.FC = () => {
                     {!searchTerm && (
                       <Link
                         to="/"
-                        className="flex items-center space-x-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+                        className="flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
                       >
                         <ArrowLeft className="w-4 h-4" />
                         <span>Browse Content</span>
@@ -400,7 +400,7 @@ const Vault: React.FC = () => {
                       return (
                         <div
                           key={`fav-${isMovie ? 'movie' : 'tv'}-${item.id}-${idx}`}
-                          className="group relative bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-lg border border-pink-200/50 dark:border-gray-600/30 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+                          className="group relative bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-lg border border-blue-200/50 dark:border-gray-600/30 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
                         >
                           <Link to={link} className="block">
                             <div className="aspect-[2/3] overflow-hidden">
@@ -413,7 +413,7 @@ const Vault: React.FC = () => {
                             </div>
                             
                             <div className="p-4">
-                              <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-sm mb-2 line-clamp-2 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">
+                              <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-sm mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                 {title}
                               </h3>
                               
@@ -433,8 +433,8 @@ const Vault: React.FC = () => {
                                   {isMovie ? "Movie" : "TV Show"}
                                 </span>
                                 <div className="flex items-center space-x-1">
-                                  <Heart className="w-3 h-3 text-pink-500 fill-current" />
-                                  <span className="text-xs text-pink-600 dark:text-pink-400 font-medium">Favorite</span>
+                                  <Heart className="w-3 h-3 text-blue-500 fill-current" />
+                                  <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">Favorite</span>
                                 </div>
                               </div>
                             </div>
@@ -468,7 +468,7 @@ const Vault: React.FC = () => {
 
                 {/* Overview Stats */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-600/30 p-6 transition-colors duration-300">
+                  <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-blue-200/50 dark:border-gray-600/30 p-6 transition-colors duration-300">
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Total Watched</p>
@@ -519,9 +519,9 @@ const Vault: React.FC = () => {
 
                 {/* Breakdown */}
                 <div className="grid lg:grid-cols-2 gap-8">
-                  <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-600/30 p-6 transition-colors duration-300">
+                  <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-blue-200/50 dark:border-gray-600/30 p-6 transition-colors duration-300">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
-                      <BarChart3 className="w-5 h-5 mr-2 text-pink-500" />
+                      <BarChart3 className="w-5 h-5 mr-2 text-blue-500" />
                       Content Breakdown
                     </h3>
                     <div className="space-y-4">
@@ -587,7 +587,7 @@ const Vault: React.FC = () => {
                 </div>
 
                 {/* Quick Actions */}
-                <div className="bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl p-8 text-white">
+                <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl p-8 text-white">
                   <h3 className="text-2xl font-bold mb-4">Keep Building Your Collection</h3>
                   <p className="text-lg opacity-90 mb-6">
                     Continue discovering and adding more content to personalize your experience
