@@ -19,16 +19,8 @@ class ContinueWatchingService {
   private readonly STORAGE_KEY = 'lunastream-continue-watching';
   private readonly MAX_ITEMS = 10;
 
-  private async isAuthenticated(): Promise<boolean> {
-    return !!user;
-  }
-
   async getContinueWatchingItems(): Promise<ContinueWatchingItem[]> {
-    if (await this.isAuthenticated()) {
-      return [];
-    } else {
-      return this.getLocalContinueWatching();
-    }
+    return this.getLocalContinueWatching();
   }
 
   private getLocalContinueWatching(): ContinueWatchingItem[] {

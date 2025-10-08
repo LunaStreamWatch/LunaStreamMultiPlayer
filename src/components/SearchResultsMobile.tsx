@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Star, Calendar, Film, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react'; // <-- Added new icons
+import { Star, Calendar, Film, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { Movie, TVShow } from '../types';
+import { translations as t } from '../services/translations';
 
 type MediaItem = (Movie | TVShow) & { media_type: 'movie' | 'tv'; popularity: number };
 
@@ -17,16 +18,10 @@ type MobileSearchResultsProps = {
   currentPage: number;
   setCurrentPage: (page: number) => void;
   resultsPerPage: number;
-  t: any;
-  // New props for loading more
-  loadMoreResults: () => void;
-  hasMore: boolean;
+  getTitle: (item: MediaItem) => string;
+  getDate: (item: MediaItem) => string | undefined;
+  getLink: (item: MediaItem) => string;
 };
-
-const isMovie = (item: MediaItem): item is Movie & { media_type: 'movie' } => item.media_type === 'movie';
-const getTitle = (item: MediaItem) => (isMovie(item) ? item.title : (item as TVShow).name);
-const getDate = (item: MediaItem) => (isMovie(item) ? item.release_date : (item as TVShow).first_air_date);
-const getLink = (item: MediaItem) => (isMovie(item) ? `/movie/${item.id}` : `/tv/${item.id}`);
 
 const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
   query,
@@ -40,9 +35,9 @@ const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
   currentPage,
   setCurrentPage,
   resultsPerPage,
-  t,
-  loadMoreResults,
-  hasMore,
+  getTitle,
+  getDate,
+  getLink,
 }) => {
   const totalLocalPages = Math.ceil(results.length / resultsPerPage);
   const startIdx = (currentPage - 1) * resultsPerPage;

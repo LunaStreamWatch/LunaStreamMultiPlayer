@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import GlobalNavbar from './GlobalNavbar';
 import { filterBannedContent } from '../utils/banList';
 import { useIsMobile } from '../hooks/useIsMobile';
+import { translations as t } from '../services/translations';
 
 
 
@@ -51,7 +52,6 @@ const Discover: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const { language, setLanguage } = useLanguage()
   const isMobile = useIsMobile()
 
   // State and ref for pagination input

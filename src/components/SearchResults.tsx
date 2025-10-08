@@ -7,6 +7,7 @@ import { Movie, TVShow } from '../types';
 import GlobalNavbar from './GlobalNavbar';
 import MobileSearchResults from './SearchResultsMobile';
 import * as useIsMobile from '../hooks/useIsMobile';
+import { translations as t } from '../services/translations';
 
 type MediaItem = (Movie | TVShow) & { media_type: 'movie' | 'tv'; popularity: number };
 
@@ -136,7 +137,7 @@ const SearchResults: React.FC = () => {
     };
 
     fetchInitialResults();
-  }, [query, sortBy, t]);
+  }, [query, sortBy]);
 
   const loadMoreResults = async () => {
     if (loading || apiPage > totalPagesFromApi) return;
@@ -257,7 +258,6 @@ const SearchResults: React.FC = () => {
           getTitle={getTitle}
           getDate={getDate}
           getLink={getLink}
-          t={t}
         />
       </div>
     );
