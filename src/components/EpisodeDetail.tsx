@@ -157,7 +157,7 @@ const EpisodeDetail: React.FC = () => {
   if (isPlaying && id && seasonNumber && episodeNumber) {
     return (
       <PlayerSelector
-        tmdbId={id}
+        tmdbId={parseInt(id)}
         mediaType="tv"
         season={parseInt(seasonNumber)}
         episode={parseInt(episodeNumber)}

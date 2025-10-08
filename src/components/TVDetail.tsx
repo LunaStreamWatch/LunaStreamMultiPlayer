@@ -11,6 +11,7 @@ import GlobalNavbar from "./GlobalNavbar"
 import Loading from "./Loading"
 import { useIsMobile } from "../hooks/useIsMobile"
 import HybridTVHeader from "./HybridTVHeader"
+import PlayerSelector from "./PlayerSelector"
 
 
 const TVDetail: React.FC = () => {
@@ -281,23 +282,14 @@ const TVDetail: React.FC = () => {
 
   if (isPlaying && currentEpisode) {
     return (
-      <div className="fixed inset-0 bg-black z-50">
-        <div className="absolute top-6 right-6 z-10">
-          <button
-            onClick={handleClosePlayer}
-            className="text-white hover:text-gray-300 transition-colors"
-            aria-label="Close Player"
-          >
-            <X className="w-8 h-8" />
-          </button>
-        </div>
-        <iframe
-          src={`https://vidify.cc/embed/tv/${id}/${currentEpisode.season_number}/${currentEpisode.episode_number}`}
-          className="fixed top-0 left-0 w-full h-full border-0"
-          title={`${show.name} - S${currentEpisode.season_number}E${currentEpisode.episode_number}`}
-          allowFullScreen
-        />
-      </div>
+      <PlayerSelector
+        tmdbId={show.id}
+        mediaType="tv"
+        title={show.name}
+        season={currentEpisode.season_number}
+        episode={currentEpisode.episode_number}
+        onClose={handleClosePlayer}
+      />
     );
   }
 
