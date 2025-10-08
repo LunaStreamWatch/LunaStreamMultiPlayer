@@ -21,8 +21,6 @@ const Vault: React.FC = () => {
   const [sortOption, setSortOption] = useState<'date' | 'title' | 'rating'>('date');
   const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
 
-  const { language, setLanguage } = useLanguage()
-
   const loadData = async () => {
     setLoading(true);
     const items = await watchlistService.getCombinedWatchlist();
@@ -136,9 +134,9 @@ const Vault: React.FC = () => {
   };
 
   const tabs = [
-            { id: 'watchlist', label: t.vault_watchlist, icon: Play, count: combinedItems.length },
-        { id: 'favorites', label: t.vault_favorites, icon: Heart, count: stats.totalFavorites },
-        { id: 'stats', label: t.vault_statistics, icon: BarChart3, count: null },
+            { id: 'watchlist', label: 'Watchlist', icon: Play, count: combinedItems.length },
+        { id: 'favorites', label: 'Favorites', icon: Heart, count: stats.totalFavorites },
+        { id: 'stats', label: 'Statistics', icon: BarChart3, count: null },
   ];
 
   return (
@@ -152,11 +150,11 @@ const Vault: React.FC = () => {
             <div>
               <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                 <span className="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-                  {t.vault_my_content} {t.nav_vault}
+                  My Vault
                 </span>
               </h1>
               <p className="text-gray-600 dark:text-gray-200">
-                {t.vault_tagline}
+                Your personal collection of movies and TV shows
               </p>
             </div>
             
@@ -169,9 +167,9 @@ const Vault: React.FC = () => {
                   onChange={(e) => setCategoryFilter(e.target.value || null)}
                   className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-xl border border-pink-200/50 dark:border-gray-600/30 text-gray-900 dark:text-gray-100 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all duration-200 appearance-none"
                 >
-                  <option value="">{t.filter_all}</option>
-                  <option value="Movie">{t.movies}</option>
-                  <option value="TV Show">{t.content_tv_plural}</option>
+                  <option value="">All</option>
+                  <option value="Movie">Movies</option>
+                  <option value="TV Show">TV Shows</option>
                 </select>
               </div>
 
@@ -180,7 +178,7 @@ const Vault: React.FC = () => {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type="text"
-                  placeholder={`${t.vault_search_placeholder}...`}
+                  placeholder={"Search your collection..."}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10 pr-4 py-2 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-xl border border-pink-200/50 dark:border-gray-600/30 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all duration-200"
@@ -241,7 +239,7 @@ const Vault: React.FC = () => {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                    {t.vault_recently_watched} ({filteredItems.length})
+                    Recently Watched ({filteredItems.length})
                   </h2>
                   {combinedItems.length > 0 && (
                     <button
@@ -249,7 +247,7 @@ const Vault: React.FC = () => {
                       className="flex items-center space-x-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-200"
                     >
                       <Trash2 className="w-4 h-4" />
-                      <span className="hidden sm:inline">{t.vault_clear_all_watchlist}</span>
+                      <span className="hidden sm:inline">Clear All</span>
                     </button>
                   )}
                 </div>
@@ -260,12 +258,12 @@ const Vault: React.FC = () => {
                       <Play className="w-10 h-10 text-white" />
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-                      {searchTerm ? t.vault_no_results_found : t.vault_watchlist_empty}
+                      {searchTerm ? "No Results Found" : "Your Watchlist is Empty"}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-200 mb-6 text-center max-w-md">
                       {searchTerm 
-                        ? `${t.vault_no_watchlist_match} "${searchTerm}".`
-                        : t.vault_start_adding_watchlist
+                        ? `No items match "${searchTerm}".`
+                        : "Start adding movies and TV shows to your watchlist"
                       }
                     </p>
                     {!searchTerm && (
@@ -274,7 +272,7 @@ const Vault: React.FC = () => {
                         className="flex items-center space-x-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
                       >
                         <ArrowLeft className="w-4 h-4" />
-                        <span>{t.vault_browse_content}</span>
+                        <span>Browse Content</span>
                       </Link>
                     )}
                   </div>
@@ -310,7 +308,7 @@ const Vault: React.FC = () => {
                               <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-2">
                                 <div className="flex items-center space-x-1">
                                   <Calendar className="w-3 h-3" />
-                                  <span>{releaseDate ? new Date(releaseDate).getFullYear() : t.content_n_a}</span>
+                                  <span>{releaseDate ? new Date(releaseDate).getFullYear() : "N/A"}</span>
                                 </div>
                                 <div className="flex items-center space-x-1">
                                   <Star className="w-3 h-3 text-yellow-500" />
@@ -320,11 +318,11 @@ const Vault: React.FC = () => {
                               
                               <div className="flex items-center justify-between">
                                 <span className="text-xs text-gray-400 dark:text-gray-500">
-                                  {isMovie ? t.content_movie_singular : t.content_tv_singular}
+                                  {isMovie ? "Movie" : "TV Show"}
                                 </span>
                                 <div className="flex items-center space-x-1">
                                   <Play className="w-3 h-3 text-pink-500" />
-                                  <span className="text-xs text-pink-600 dark:text-pink-400 font-medium">{t.action_watch}</span>
+                                  <span className="text-xs text-pink-600 dark:text-pink-400 font-medium">Watch</span>
                                 </div>
                               </div>
                             </div>
@@ -337,7 +335,7 @@ const Vault: React.FC = () => {
                               removeItem(item);
                             }}
                             className="absolute top-2 right-2 w-8 h-8 bg-red-500/90 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-lg"
-                            title={t.action_remove_from_watchlist || "Remove from watchlist"}
+                            title="Remove from watchlist"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -354,7 +352,7 @@ const Vault: React.FC = () => {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                    {t.vault_favorites} ({filteredFavorites.length})
+                    Favorites ({filteredFavorites.length})
                   </h2>
                   {(favoriteMovies.length > 0 || favoriteShows.length > 0) && (
                     <button
@@ -362,7 +360,7 @@ const Vault: React.FC = () => {
                       className="flex items-center space-x-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-200"
                     >
                       <Trash2 className="w-4 h-4" />
-                      <span className="hidden sm:inline">{t.vault_clear_all_favorites}</span>
+                      <span className="hidden sm:inline">Clear All</span>
                     </button>
                   )}
                 </div>
@@ -373,12 +371,12 @@ const Vault: React.FC = () => {
                       <Heart className="w-10 h-10 text-white" />
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-                      {searchTerm ? t.vault_no_results_found : t.vault_no_favorites_yet}
+                      {searchTerm ? "No Results Found" : "No Favorites Yet"}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-200 mb-6 text-center max-w-md">
-                      {searchTerm 
-                        ? `${t.vault_no_favorites_match} "${searchTerm}".`
-                        : t.vault_start_adding_favorites
+                      {searchTerm
+                        ? `No favorites match "${searchTerm}".`
+                        : "Start adding movies and TV shows to your favorites"
                       }
                     </p>
                     {!searchTerm && (
@@ -387,7 +385,7 @@ const Vault: React.FC = () => {
                         className="flex items-center space-x-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-pink-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
                       >
                         <ArrowLeft className="w-4 h-4" />
-                        <span>{t.vault_browse_content}</span>
+                        <span>Browse Content</span>
                       </Link>
                     )}
                   </div>
@@ -422,21 +420,21 @@ const Vault: React.FC = () => {
                               <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-2">
                                 <div className="flex items-center space-x-1">
                                   <Calendar className="w-3 h-3" />
-                                  <span>{releaseDate ? new Date(releaseDate).getFullYear() : t.content_n_a}</span>
+                                  <span>{releaseDate ? new Date(releaseDate).getFullYear() : "N/A"}</span>
                                 </div>
                                 <div className="flex items-center space-x-1">
                                   <Star className="w-3 h-3 text-yellow-500" />
-                                  <span>{item.vote_average?.toFixed(1) || t.content_n_a}</span>
+                                  <span>{item.vote_average?.toFixed(1) || "N/A"}</span>
                                 </div>
                               </div>
                               
                               <div className="flex items-center justify-between">
                                 <span className="text-xs text-gray-400 dark:text-gray-500">
-                                  {isMovie ? t.content_movie_singular : t.content_tv_singular}
+                                  {isMovie ? "Movie" : "TV Show"}
                                 </span>
                                 <div className="flex items-center space-x-1">
                                   <Heart className="w-3 h-3 text-pink-500 fill-current" />
-                                  <span className="text-xs text-pink-600 dark:text-pink-400 font-medium">{t.vault_favorite}</span>
+                                  <span className="text-xs text-pink-600 dark:text-pink-400 font-medium">Favorite</span>
                                 </div>
                               </div>
                             </div>
@@ -449,7 +447,7 @@ const Vault: React.FC = () => {
                               removeFavorite(item.id, isMovie ? 'movie' : 'tv');
                             }}
                             className="absolute top-2 right-2 w-8 h-8 bg-red-500/90 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-lg"
-                            title={t.action_remove_from_favorites || "Remove from favorites"}
+                            title="Remove from favorites"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -465,7 +463,7 @@ const Vault: React.FC = () => {
             {activeTab === 'stats' && (
               <div className="space-y-8">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  {t.vault_statistics_title}
+                  Your Statistics
                 </h2>
 
                 {/* Overview Stats */}
@@ -473,7 +471,7 @@ const Vault: React.FC = () => {
                   <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-600/30 p-6 transition-colors duration-300">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{t.vault_total} {t.vault_watched}</p>
+                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Total Watched</p>
                         <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.totalWatched}</p>
                       </div>
                       <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-pink-600 rounded-lg flex items-center justify-center">
@@ -485,7 +483,7 @@ const Vault: React.FC = () => {
                   <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-purple-200/50 dark:border-gray-600/30 p-6 transition-colors duration-300">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{t.vault_total} {t.vault_favorites}</p>
+                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Total Favorites</p>
                         <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.totalFavorites}</p>
                       </div>
                       <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
@@ -497,7 +495,7 @@ const Vault: React.FC = () => {
                   <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-indigo-200/50 dark:border-gray-600/30 p-6 transition-colors duration-300">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{t.movies} {t.watched}</p>
+                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Movies Watched</p>
                         <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.moviesWatched}</p>
                       </div>
                       <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center">
@@ -509,7 +507,7 @@ const Vault: React.FC = () => {
                   <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-green-200/50 dark:border-gray-600/30 p-6 transition-colors duration-300">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{t.tvs} {t.watched}</p>
+                        <p className="text-sm font-medium text-gray-600 dark:text-gray-300">TV Shows Watched</p>
                         <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.showsWatched}</p>
                       </div>
                       <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
@@ -524,11 +522,11 @@ const Vault: React.FC = () => {
                   <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-600/30 p-6 transition-colors duration-300">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
                       <BarChart3 className="w-5 h-5 mr-2 text-pink-500" />
-                      {t.vault_content_breakdown}
+                      Content Breakdown
                     </h3>
                     <div className="space-y-4">
                       <div className="flex justify-between items-center">
-                        <span className="text-gray-600 dark:text-gray-300">{t.movies}</span>
+                        <span className="text-gray-600 dark:text-gray-300">Movies</span>
                         <div className="flex items-center space-x-2">
                           <div className="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                             <div
@@ -540,7 +538,7 @@ const Vault: React.FC = () => {
                         </div>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-gray-600 dark:text-gray-300">{t.tvs}</span>
+                        <span className="text-gray-600 dark:text-gray-300">TV Shows</span>
                         <div className="flex items-center space-x-2">
                           <div className="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                             <div
@@ -557,11 +555,11 @@ const Vault: React.FC = () => {
                   <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl border border-purple-200/50 dark:border-gray-600/30 p-6 transition-colors duration-300">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
                       <Heart className="w-5 h-5 mr-2 text-purple-500" />
-                      {t.vault_favorites}{t.vault_breakdown}
+                      Favorites Breakdown
                     </h3>
                     <div className="space-y-4">
                       <div className="flex justify-between items-center">
-                        <span className="text-gray-600 dark:text-gray-300">{t.favorite} {t.movies}</span>
+                        <span className="text-gray-600 dark:text-gray-300">Favorite Movies</span>
                         <div className="flex items-center space-x-2">
                           <div className="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                             <div
@@ -573,7 +571,7 @@ const Vault: React.FC = () => {
                         </div>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-gray-600 dark:text-gray-300">{t.favorite} {t.tvs}</span>
+                        <span className="text-gray-600 dark:text-gray-300">Favorite TV Shows</span>
                         <div className="flex items-center space-x-2">
                           <div className="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                             <div
@@ -590,9 +588,9 @@ const Vault: React.FC = () => {
 
                 {/* Quick Actions */}
                 <div className="bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl p-8 text-white">
-                  <h3 className="text-2xl font-bold mb-4">{t.keep_building}</h3>
+                  <h3 className="text-2xl font-bold mb-4">Keep Building Your Collection</h3>
                   <p className="text-lg opacity-90 mb-6">
-                    {t.keep_building_sub}
+                    Continue discovering and adding more content to personalize your experience
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Link
@@ -600,14 +598,14 @@ const Vault: React.FC = () => {
                       className="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-white/20 hover:bg-white/30 transition-all text-white font-semibold"
                     >
                       <TrendingUp className="w-5 h-5" />
-                      {t.vault_browse_trending}
+                      Browse Trending
                     </Link>
                     <Link
                       to="/search"
                       className="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-white/20 hover:bg-white/30 transition-all text-white font-semibold"
                     >
                       <Search className="w-5 h-5" />
-                      {t.search_content}
+                      Search Content
                     </Link>
                   </div>
                 </div>

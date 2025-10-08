@@ -20,8 +20,6 @@ const HomePage: React.FC = () => {
   const navigate = useNavigate()
   const [showAllFaves, setShowAllFaves] = React.useState(false)
 
-  const { language, setLanguage } = useLanguage()
-
   const [recentlyViewedMovies, setRecentlyViewedMovies] = useState<any[]>([])
   const [recentlyViewedTVEpisodes, setRecentlyViewedTVEpisodes] = useState<{
     [showId: number]: { show: any; episodes: any[] }
@@ -110,7 +108,7 @@ const HomePage: React.FC = () => {
         setTrendingMovies(moviesData.results?.slice(0, 12) || [])
         setTrendingTV(tvData.results?.slice(0, 12) || [])
       } catch (error) {
-        console.error(t.home_trending_fetch_error, error)
+        console.error('Error fetching trending content:', error)
       } finally {
         setLoading(false)
       }
@@ -138,12 +136,12 @@ const HomePage: React.FC = () => {
           <div className="text-center">
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 transition-colors duration-300 px-4">
               <span className="bg-gradient-to-r from-[var(--grad-from)] to-[var(--grad-to)] bg-clip-text text-transparent">
-                {t.home_heading_title}
+                Discover Unlimited Entertainment
               </span>
             </h1>
             {/* Subtitle */}
             <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 max-w-3xl mx-auto transition-colors duration-300 px-4">
-              {t.home_heading_subtitle}
+              Stream your favorite movies and TV shows
             </p>
             {/* Search with Suggestions */}
             <form onSubmit={handleSearch} className="max-w-2xl mx-auto relative px-4">
@@ -193,19 +191,19 @@ const HomePage: React.FC = () => {
                             .slice(0, 6)
                           setSuggestions(combined)
                         } catch (error) {
-                          console.error(t.search_fail_error, error)
+                          console.error('Search failed:', error)
                           setSuggestions([])
                         }
                       } else {
                         setSuggestions([])
                       }
                     }}
-                    placeholder={t.search_placeholder}
+                    placeholder="Search movies and TV shows..."
                     className="block w-full pl-12 sm:pl-16 pr-4 sm:pr-6 py-4 sm:py-6 text-base sm:text-lg bg-transparent border-0 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:ring-0 focus:outline-none transition-colors duration-300"
                   />
                   <button type="submit" className="absolute inset-y-0 right-0 flex items-center pr-2 sm:pr-6">
                     <div className="bg-gradient-to-r from-[var(--grad-from)] to-[var(--grad-to)] text-white px-4 sm:px-8 py-2 sm:py-3 rounded-xl font-semibold hover:opacity-95 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                      <span className="hidden sm:inline">{t.nav_search}</span>
+                      <span className="hidden sm:inline">Search</span>
                       <Search className="w-4 h-4 sm:hidden" />
                     </div>
                   </button>
@@ -217,7 +215,7 @@ const HomePage: React.FC = () => {
                       const isMovie = item.media_type === "movie"
                       const title = isMovie ? item.title : item.name
                       const releaseDate = isMovie ? item.release_date : item.first_air_date
-                      const year = releaseDate ? new Date(releaseDate).getFullYear() : t.content_n_a
+                      const year = releaseDate ? new Date(releaseDate).getFullYear() : 'N/A'
 
                       return (
                         <div
@@ -257,15 +255,15 @@ const HomePage: React.FC = () => {
                                         : "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300"
                                     }`}
                                   >
-                                    {isMovie ? t.content_movie_singular : t.content_tv_singular}
+                                    {isMovie ? 'Movie' : 'TV Show'}
                                   </span>
                                 </div>
 
                                 {/* TV Show specific info */}
                                 {!isMovie && (
                                   <div className="flex items-center space-x-3 mt-1 text-xs text-gray-500 dark:text-gray-400">
-                                    <span>{t.content_seasons} {(item as any).number_of_seasons || t.content_n_a}</span>
-                                    <span>{t.content_episodes} {(item as any).number_of_episodes || t.content_n_a}</span>
+                                    <span>Seasons: {(item as any).number_of_seasons || 'N/A'}</span>
+                                    <span>Episodes: {(item as any).number_of_episodes || 'N/A'}</span>
                                   </div>
                                 )}
 
@@ -316,7 +314,7 @@ const HomePage: React.FC = () => {
               <TrendingUp className="w-8 h-8 text-white" />
             </div>
             <p className="text-gray-600 dark:text-gray-300 text-lg transition-colors duration-300">
-              {t.home_trending_loading}
+              Loading trending content...
             </p>
           </div>
         ) : (
@@ -325,7 +323,7 @@ const HomePage: React.FC = () => {
             <div className="mb-12">
               <h2 className="flex items-center mb-8 text-3xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
                 <TrendingUp className="w-8 h-8 mr-3 text-pink-500" />
-                {t.content_trending} {t.content_movie_plural}
+                Trending Movies
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 tablet-grid lg:grid-cols-6 gap-4 sm:gap-6">
                 {trendingMovies.map((movie) => (
@@ -362,7 +360,7 @@ const HomePage: React.FC = () => {
             <div>
               <h2 className="flex items-center mb-8 text-3xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
                 <TrendingUp className="w-8 h-8 mr-3 text-purple-500" />
-                {t.content_trending} {t.content_tv_plural}
+                Trending TV Shows
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 tablet-grid lg:grid-cols-6 gap-4 sm:gap-6">
                 {trendingTV.map((show) => (

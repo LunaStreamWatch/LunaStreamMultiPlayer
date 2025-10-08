@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
           <a
             href="mailto:admin@lunastream.watch"
             className="bg-red-500 hover:bg-red-600 text-white p-3 rounded-lg shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
-            title={t.footer_email_us}
+            title="Email Us"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-lg shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
-            title={t.footer_join_discord}
+            title="Join Discord"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="bg-black hover:bg-gray-800 text-white p-3 rounded-lg shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
-            title={t.footer_follow_tiktok}
+            title="Follow on TikTok"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@ const Footer: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="bg-sky-500 hover:bg-sky-600 text-white p-3 rounded-lg shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
-            title={t.footer_follow_twitter}
+            title="Follow on Twitter"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
-            title={t.footer_join_telegram}
+            title="Join Telegram"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
