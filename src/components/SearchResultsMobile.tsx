@@ -43,17 +43,17 @@ const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
   const paginatedResults = results.slice(startIdx, startIdx + resultsPerPage);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300 px-4 py-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-pink-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300 px-4 py-4">
 
       {/* Warning modal */}
       {warningVisible && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[1000] flex items-center justify-center px-6">
           <div className="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-lg w-full text-center">
-            <h2 className="text-3xl font-bold mb-4 text-blue-600 dark:text-blue-400">Haiii!</h2>
+            <h2 className="text-3xl font-bold mb-4 text-[var(--grad-from)] dark:text-[var(--grad-from)]">Haiii!</h2>
             <p className="mb-6 text-gray-700 dark:text-gray-300">Please stay safe online and avoid inappropriate content.</p>
             <button
               onClick={() => setWarningVisible(false)}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg focus:ring-4 focus:ring-blue-400"
+              className="bg-[var(--grad-from)] hover:bg-[var(--grad-to)] text-white font-semibold px-6 py-3 rounded-lg shadow-lg focus:ring-4 focus:ring-blue-400"
             >
               I understand, continue
             </button>
@@ -137,7 +137,7 @@ const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
             <button
               onClick={() => setCurrentPage(1)}
               disabled={currentPage === 1}
-              className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="px-4 py-2 rounded-md bg-[var(--grad-from)] text-white font-semibold hover:bg-[var(--grad-to)] disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <ChevronsLeft />
             </button>
@@ -145,7 +145,7 @@ const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
             <button
               onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
               disabled={currentPage === 1}
-              className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="px-4 py-2 rounded-md bg-[var(--grad-from)] text-white font-semibold hover:bg-[var(--grad-to)] disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <ChevronLeft />
             </button>
@@ -169,8 +169,8 @@ const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
                     aria-current={currentPage === i ? 'page' : undefined}
                     className={`px-4 py-2 rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400 ${
                       currentPage === i
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-blue-100 dark:hover:bg-blue-900'
+                        ? 'bg-[var(--grad-from)] text-white'
+                        : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-pink-100 dark:hover:bg-gray-700'
                     }`}
                   >
                     {i}
@@ -183,7 +183,7 @@ const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
             <button
               onClick={() => setCurrentPage(p => Math.min(p + 1, totalLocalPages))}
               disabled={currentPage === totalLocalPages}
-              className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="px-4 py-2 rounded-md bg-[var(--grad-from)] text-white font-semibold hover:bg-[var(--grad-to)] disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <ChevronRight />
             </button>
@@ -191,7 +191,7 @@ const SearchResultsMobile: React.FC<MobileSearchResultsProps> = ({
             <button
               onClick={() => setCurrentPage(totalLocalPages)}
               disabled={currentPage === totalLocalPages}
-              className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="px-4 py-2 rounded-md bg-[var(--grad-from)] text-white font-semibold hover:bg-[var(--grad-to)] disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <ChevronsRight />
             </button>

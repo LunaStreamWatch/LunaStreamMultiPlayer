@@ -5,12 +5,12 @@ const Footer: React.FC = () => {
   return (
     <div
       className="
-        border-t border-blue-200/50 dark:border-gray-700/50 
+        border-t border-pink-200/50 dark:border-gray-700/50 
         py-6 
         transition-colors duration-300 
         backdrop-blur-sm
         bg-gradient-to-br 
-        from-slate-50 via-blue-50 to-slate-100 
+        from-slate-50 via-pink-50 to-slate-100 
         dark:from-gray-950 dark:via-gray-900 dark:to-gray-950
       "
     >
@@ -115,7 +115,7 @@ const Footer: React.FC = () => {
             href="https://t.me/lunastreaming"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
+            className="bg-[var(--grad-from)] hover:bg-[var(--grad-to)] text-white p-3 rounded-lg shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
             title="Join Telegram"
           >
             <svg

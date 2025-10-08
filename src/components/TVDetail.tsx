@@ -263,14 +263,14 @@ const TVDetail: React.FC = () => {
 
   if (!show) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900 flex items-center justify-center transition-colors duration-300">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-pink-50 to-slate-100 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900 flex items-center justify-center transition-colors duration-300">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
             Show not found
           </h2>
           <Link
             to="/"
-            className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-pink-300 transition-colors"
+            className="text-[var(--grad-from)] dark:text-[var(--grad-from)] hover:text-[var(--grad-to)] dark:hover:text-pink-300 transition-colors"
           >
             Go Home
           </Link>
@@ -302,7 +302,7 @@ const TVDetail: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-pink-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
       <GlobalNavbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mobile-spacing">
@@ -310,7 +310,7 @@ const TVDetail: React.FC = () => {
         <div className="mb-8">
           <Link
             to={`/`}
-            className="text-blue-600 dark:text-blue-400 hover:underline ml-1"
+            className="text-[var(--grad-from)] dark:text-[var(--grad-from)] hover:underline ml-1"
           >
             <ChevronLeft />
           </Link>
@@ -358,7 +358,7 @@ const TVDetail: React.FC = () => {
         {/* Comments Section removed */}
 
         {/* Season Selector & Episodes */}
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm mobile-card rounded-2xl shadow-xl border border-blue-200/50 dark:border-gray-700/50 p-4 sm:p-6 transition-colors duration-300 mt-8">
+        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm mobile-card rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-700/50 p-4 sm:p-6 transition-colors duration-300 mt-8">
           {/* Adjust layout for mobile */}
           <div className={`flex items-center justify-between mb-6 ${isMobile ? "flex-col space-y-4" : ""}`}>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
@@ -380,7 +380,7 @@ const TVDetail: React.FC = () => {
                   <select
                     value={selectedSeason}
                     onChange={(e) => setSelectedSeason(Number(e.target.value))}
-                    className="pr-10 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-xl border border-blue-200/50 dark:border-gray-600/30 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 appearance-none py-2 px-4 cursor-pointer font-semibold"
+                    className="pr-10 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-xl border border-pink-200/50 dark:border-gray-600/30 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 appearance-none py-2 px-4 cursor-pointer font-semibold"
                   >
                     {show.seasons
                       .filter((season: any) => season.season_number > 0)
@@ -399,7 +399,7 @@ const TVDetail: React.FC = () => {
           {/* Episodes List */}
           {episodesLoading ? (
             <div className={`text-center ${isMobile ? 'py-6' : 'py-8'}`}>
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full animate-spin flex items-center justify-center mx-auto mb-4">
+              <div className="w-12 h-12 bg-gradient-to-r from-[var(--grad-from)] to-[var(--grad-to)] rounded-full animate-spin flex items-center justify-center mx-auto mb-4">
                 <Tv className="w-6 h-6 text-white" />
               </div>
               <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">
@@ -411,16 +411,16 @@ const TVDetail: React.FC = () => {
               {episodes.map((episode) => (
                 <div
                   key={episode.id}
-                  className={`group bg-gradient-to-br from-pink-50 to-purple-50 dark:from-gray-700 dark:to-gray-600 border border-blue-200/50 dark:border-gray-600/50 overflow-hidden hover:shadow-lg transition-all duration-300 ${isMobile ? 'rounded-lg' : 'rounded-xl'}`}
+                  className={`group bg-gradient-to-br from-pink-50 to-purple-50 dark:from-gray-700 dark:to-gray-600 border border-pink-200/50 dark:border-gray-600/50 overflow-hidden hover:shadow-lg transition-all duration-300 ${isMobile ? 'rounded-lg' : 'rounded-xl'}`}
                 >
                   <div className={isMobile ? 'p-3' : 'p-4'}>
                     <>
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center space-x-3">
-                          <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          <span className="bg-gradient-to-r from-[var(--grad-from)] to-[var(--grad-to)] text-white px-3 py-1 rounded-full text-sm font-semibold">
                             {episode.episode_number}
                           </span>
-                          <h3 className={`font-semibold ${isMobile ? 'text-sm' : 'text-base'} text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors`}>
+                          <h3 className={`font-semibold ${isMobile ? 'text-sm' : 'text-base'} text-gray-900 dark:text-white group-hover:text-[var(--grad-from)] dark:group-hover:text-[var(--grad-from)] transition-colors`}>
                             {episode.name}
                           </h3>
                         </div>
@@ -435,7 +435,7 @@ const TVDetail: React.FC = () => {
                           {episode.overview && (
                             <button
                               onClick={() => toggleDescription(episode.id)}
-                              className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors p-1"
+                              className="text-gray-500 dark:text-gray-400 hover:text-[var(--grad-from)] dark:hover:text-[var(--grad-from)] transition-colors p-1"
                               title='Show episode info'
                             >
                               <Info className="w-5 h-5" />
@@ -443,7 +443,7 @@ const TVDetail: React.FC = () => {
                           )}
                           <button
                             onClick={() => handleWatchEpisode(episode)}
-                            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1 rounded-lg font-semibold hover:from-pink-600 hover:to-purple-700 transition-colors flex items-center space-x-2"
+                            className="bg-gradient-to-r from-[var(--grad-from)] to-[var(--grad-to)] text-white px-3 py-1 rounded-lg font-semibold hover:from-pink-600 hover:to-purple-700 transition-colors flex items-center space-x-2"
                             title='Watch'
                           >
                             <Play className="w-4 h-4" />
@@ -452,7 +452,7 @@ const TVDetail: React.FC = () => {
                         </div>
                       </div>
                       {showDescriptions[episode.id] && (
-                        <div className="mt-3 p-3 bg-white/60 dark:bg-gray-800/60 rounded-lg border border-blue-200/30 dark:border-gray-600/30 transition-colors duration-300">
+                        <div className="mt-3 p-3 bg-white/60 dark:bg-gray-800/60 rounded-lg border border-pink-200/30 dark:border-gray-600/30 transition-colors duration-300">
                           {episode.air_date && (
                             <div className="flex items-center text-sm text-gray-600 dark:text-gray-300 mb-2 transition-colors duration-300">
                               <Calendar className="w-4 h-4 mr-2" />

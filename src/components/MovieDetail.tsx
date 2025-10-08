@@ -11,6 +11,7 @@ import { continueWatchingService } from "../services/continueWatching"
 import GlobalNavbar from "./GlobalNavbar"
 import Loading from "./Loading"
 import HybridMovieHeader from "./HybridMovieHeader"
+import PlayerSelector from "./PlayerSelector"
 
 
 const MovieDetail: React.FC = () => {
@@ -180,14 +181,14 @@ const MovieDetail: React.FC = () => {
 
   if (!movie) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-pink-50 to-slate-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             Movie not found
           </h2>
           <Link
             to="/"
-            className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-pink-300"
+            className="text-[var(--grad-from)] dark:text-[var(--grad-from)] hover:text-[var(--grad-to)] dark:hover:text-[var(--grad-to)]"
           >
             Go Home
           </Link>
@@ -196,35 +197,24 @@ const MovieDetail: React.FC = () => {
     )
   }
 
-  if (isPlaying) {
+  if (isPlaying && id) {
     return (
-      <div className="fixed inset-0 bg-black z-50">
-        <div className="absolute top-6 right-6 z-10">
-          <button
-            onClick={handleClosePlayer}
-            className="text-white hover:text-gray-300"
-            aria-label="Close Player"
-          >
-            <X className="w-8 h-8" />
-          </button>
-        </div>
-        <iframe
-          src={`https://vidify.cc/embed/movie/${id}`}
-          className="fixed top-0 left-0 w-full h-full border-0"
-          title={movie.title}
-          allowFullScreen
-        />
-      </div>
+      <PlayerSelector
+        tmdbId={id}
+        mediaType="movie"
+        title={movie.title}
+        onClose={handleClosePlayer}
+      />
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-pink-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
       <GlobalNavbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="p-4 sm:p-8 flex-1 mobile-spacing">
           <div className="space-y-6">
-            <Link to={`/`} className="text-blue-600 dark:text-blue-400 hover:underline ml-1">
+            <Link to={`/`} className="text-[var(--grad-from)] dark:text-[var(--grad-from)] hover:underline ml-1">
               <ChevronLeft />
             </Link>
             <HybridMovieHeader
@@ -242,7 +232,7 @@ const MovieDetail: React.FC = () => {
             
             {/* Comments Section removed */}
           </div>
-          <div className="mt-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm mobile-card rounded-2xl shadow-xl border border-blue-200/50 dark:border-gray-700/50 p-4 sm:p-8">
+          <div className="mt-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm mobile-card rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-700/50 p-4 sm:p-8">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
               Cast Overview
             </h2>
@@ -287,7 +277,7 @@ const MovieDetail: React.FC = () => {
       {/* Easter Egg */}
       {movie && [816, 817, 818].includes(movie.id) && (
         <div
-          className="fixed bottom-4 right-4 z-50 flex items-center space-x-3 bg-blue-600/90 dark:bg-blue-700/90 rounded-full px-4 py-2 shadow-lg cursor-pointer"
+          className="fixed bottom-4 right-4 z-50 flex items-center space-x-3 bg-gradient-to-r from-[var(--grad-from)] to-[var(--grad-to)] rounded-full px-4 py-2 shadow-lg cursor-pointer"
           onClick={handleFrogBoop}
           role="button"
           tabIndex={0}

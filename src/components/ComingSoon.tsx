@@ -234,7 +234,7 @@ const ComingSoon: React.FC = () => {
                       />
                     </div>
                     <div className={isMobile ? 'p-2' : 'p-3'}>
-                      <h3 className={`font-semibold text-gray-800 dark:text-white line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-purple-400 ${isMobile ? 'text-xs' : 'text-sm'}`}>
+                      <h3 className={`font-semibold text-gray-800 dark:text-white line-clamp-2 group-hover:text-[var(--grad-from)] dark:group-hover:text-purple-400 ${isMobile ? 'text-xs' : 'text-sm'}`}>
                         {title}
                       </h3>
                       <div className={`flex justify-between mt-1 text-gray-500 dark:text-gray-400 ${isMobile ? 'text-xs' : 'text-xs'}`}>

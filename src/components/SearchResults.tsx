@@ -209,7 +209,7 @@ const SearchResults: React.FC = () => {
 
   if (isMobile) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-pink-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
         <GlobalNavbar />
         {/* Mobile Search/Sort UI */}
         <div className="backdrop-blur-md sticky top-16 z-40 transition-colors duration-300">
@@ -222,13 +222,13 @@ const SearchResults: React.FC = () => {
                   placeholder="Search movies and TV shows..."
                   value={searchInput}
                   onChange={handleInputChange}
-                  className="w-full pl-10 pr-4 h-12 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-xl border border-blue-200/50 dark:border-gray-600/30 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+                  className="w-full pl-10 pr-4 h-12 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-xl border border-pink-200/50 dark:border-gray-600/30 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
                 />
               </div>
             </div>
             <div className="flex items-center justify-between mt-2">
               <p className="text-sm text-gray-700 dark:text-gray-300 truncate">
-                Search results for "<span className="font-semibold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">{query}</span>" — {results.length} {results.length === 1 ? 'result' : 'results'}
+                Search results for "<span className="font-semibold bg-gradient-to-r from-[var(--grad-from)] to-[var(--grad-to)] bg-clip-text text-transparent">{query}</span>" — {results.length} {results.length === 1 ? 'result' : 'results'}
               </p>
               <select
                 aria-label="Sort by"
@@ -263,7 +263,7 @@ const SearchResults: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-pink-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
       <GlobalNavbar />
       <div className="backdrop-blur-md sticky top-16 z-40 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -275,13 +275,13 @@ const SearchResults: React.FC = () => {
                 placeholder="Search movies and TV shows..."
                 value={searchInput}
                 onChange={handleInputChange}
-                className="w-full pl-10 pr-4 h-12 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-l-xl border border-blue-200/50 dark:border-gray-600/30 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+                className="w-full pl-10 pr-4 h-12 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-l-xl border border-pink-200/50 dark:border-gray-600/30 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
               />
             </div>
             <select
               value={sortBy}
               onChange={handleSortChange}
-              className="h-12 px-6 rounded-r-xl border border-l-0 border-blue-200/50 dark:border-gray-600/30 bg-white/95 dark:bg-gray-800/95 text-gray-900 dark:text-gray-100 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 appearance-none"
+              className="h-12 px-6 rounded-r-xl border border-l-0 border-pink-200/50 dark:border-gray-600/30 bg-white/95 dark:bg-gray-800/95 text-gray-900 dark:text-gray-100 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 appearance-none"
               style={{ paddingRight: '1.5rem' }}
             >
               <option value="popularity">Popularity</option>
@@ -294,13 +294,13 @@ const SearchResults: React.FC = () => {
       {warningVisible && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[1000] flex items-center justify-center px-6">
           <div className="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-lg w-full text-center">
-            <h2 className="text-3xl font-bold mb-4 text-blue-600 dark:text-blue-400">Haiii!</h2>
+            <h2 className="text-3xl font-bold mb-4 text-[var(--grad-from)] dark:text-[var(--grad-from)]">Haiii!</h2>
             <p className="mb-6 text-gray-700 dark:text-gray-300">
               Please stay safe online and avoid inappropriate content.
             </p>
             <button
               onClick={() => setWarningVisible(false)}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg focus:ring-4 focus:ring-blue-400"
+              className="bg-[var(--grad-from)] hover:bg-[var(--grad-to)] text-white font-semibold px-6 py-3 rounded-lg shadow-lg focus:ring-4 focus:ring-blue-400"
             >
               I understand, continue
             </button>
@@ -311,7 +311,7 @@ const SearchResults: React.FC = () => {
       <main className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 ${warningVisible ? 'blur-sm pointer-events-none' : ''}`}>
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            Search results for "<span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">{query}</span>"
+            Search results for "<span className="bg-gradient-to-r from-[var(--grad-from)] to-[var(--grad-to)] bg-clip-text text-transparent">{query}</span>"
           </h1>
           <p className="text-gray-600 dark:text-gray-400">{results.length} {results.length === 1 ? 'result' : 'results'}</p>
           {loading && <p className="text-gray-600 dark:text-gray-400">Loading...</p>}
@@ -336,7 +336,7 @@ const SearchResults: React.FC = () => {
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   ) : (
-                    <div className="flex items-center justify-center w-full h-full bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs uppercase font-semibold">
+                    <div className="flex items-center justify-center w-full h-full bg-pink-100 dark:bg-gray-800 text-[var(--grad-to)] dark:text-[var(--grad-from)] text-xs uppercase font-semibold">
                       No Poster
                     </div>
                   )}
@@ -371,7 +371,7 @@ const SearchResults: React.FC = () => {
             <button
               onClick={() => setCurrentPage(1)}
               disabled={currentPage === 1}
-              className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="px-4 py-2 rounded-md bg-[var(--grad-from)] text-white font-semibold hover:bg-[var(--grad-to)] disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <ChevronsLeft />
             </button>
@@ -379,7 +379,7 @@ const SearchResults: React.FC = () => {
             <button
               onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
               disabled={currentPage === 1}
-              className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="px-4 py-2 rounded-md bg-[var(--grad-from)] text-white font-semibold hover:bg-[var(--grad-to)] disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <ChevronLeft />
             </button>
@@ -403,8 +403,8 @@ const SearchResults: React.FC = () => {
                     aria-current={currentPage === i ? 'page' : undefined}
                     className={`px-4 py-2 rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400 ${
                       currentPage === i
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-blue-100 dark:hover:bg-blue-900'
+                        ? 'bg-[var(--grad-from)] text-white'
+                        : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-pink-100 dark:hover:bg-gray-700'
                     }`}
                   >
                     {i}
@@ -417,7 +417,7 @@ const SearchResults: React.FC = () => {
             <button
               onClick={() => setCurrentPage(p => Math.min(p + 1, totalLocalPages))}
               disabled={currentPage === totalLocalPages}
-              className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="px-4 py-2 rounded-md bg-[var(--grad-from)] text-white font-semibold hover:bg-[var(--grad-to)] disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <ChevronRight />
             </button>
@@ -425,7 +425,7 @@ const SearchResults: React.FC = () => {
             <button
               onClick={() => setCurrentPage(totalLocalPages)}
               disabled={currentPage === totalLocalPages}
-              className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="px-4 py-2 rounded-md bg-[var(--grad-from)] text-white font-semibold hover:bg-[var(--grad-to)] disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <ChevronsRight />
             </button>

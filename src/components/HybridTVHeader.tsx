@@ -129,7 +129,7 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
                 className="w-48 h-72 md:w-64 md:h-96 rounded-xl shadow-2xl transition-transform group-hover:scale-105"
               />
               {displayData.type === "season" && (
-                <div className="absolute top-2 left-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <div className="absolute top-2 left-2 bg-gradient-to-r from-[var(--grad-from)] to-[var(--grad-to)] text-white px-3 py-1 rounded-full text-sm font-semibold">
                   Season {selectedSeason}
                 </div>
               )}
@@ -152,8 +152,8 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
                 onClick={onToggleFavorite}
                 className={`p-2 rounded-full transition-colors ${
                   isFavorited
-                    ? "text-blue-500 bg-blue-500/20"
-                    : "text-white hover:text-blue-500 hover:bg-blue-500/20"
+                    ? "text-[var(--grad-from)] bg-[var(--grad-from)]/20"
+                    : "text-white hover:text-[var(--grad-from)] hover:bg-[var(--grad-from)]/20"
                 }`}
               >
                 <Heart className="w-6 h-6" fill={isFavorited ? "currentColor" : "none"} />
@@ -195,7 +195,7 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
                         onSeasonChange(0)
                         setDropdownOpen(false)
                       }}
-                      className={`px-4 py-2 text-white hover:bg-blue-500/20 cursor-pointer ${
+                      className={`px-4 py-2 text-white hover:bg-[var(--grad-from)]/20 cursor-pointer ${
                         selectedSeason === 0 ? "bg-white/10" : ""
                       }`}
                     >
@@ -208,7 +208,7 @@ const HybridTVHeader: React.FC<HybridTVHeaderProps> = ({
                           onSeasonChange(season.season_number)
                           setDropdownOpen(false)
                         }}
-                        className={`px-4 py-2 text-white hover:bg-blue-500/20 cursor-pointer ${
+                        className={`px-4 py-2 text-white hover:bg-[var(--grad-from)]/20 cursor-pointer ${
                           selectedSeason === season.season_number ? "bg-white/10" : ""
                         }`}
                       >

@@ -147,7 +147,7 @@ export const SettingsMenu: React.FC = () => {
                               type="checkbox"
                               checked={animationSettings.enableWelcomeAnimation}
                               onChange={(e) => handleAnimationSettingChange('enableWelcomeAnimation', e.target.checked)}
-                              className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                              className="h-5 w-5 rounded border-gray-300 text-[var(--grad-from)] focus:ring-blue-500"
                             />
                           </label>
                         </div>
