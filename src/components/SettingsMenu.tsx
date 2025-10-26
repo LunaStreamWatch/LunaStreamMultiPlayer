@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Cog, Moon, Sun, Wand2, X } from "lucide-react";
+import { Cog, Moon, Sun, Wand2, X, Settings } from "lucide-react";
 import { AnimationSettingsService, type AnimationSettings } from "../services/animationSettings";
+import { TechnicalSettingsService, type TechnicalSettings } from "../services/technicalSettings";
 
 const storage = {
   get: (k: string) => {
@@ -16,9 +17,12 @@ export const SettingsMenu: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">(() => (document.documentElement.classList.contains("dark") ? "dark" : (storage.get("theme") as any) || "light"));
   const ref = useRef<HTMLDivElement>(null);
-  const [tab, setTab] = useState<"theme" | "visuals">("theme");
+  const [tab, setTab] = useState<"theme" | "visuals" | "technical">("theme");
   const [animationSettings, setAnimationSettings] = useState<AnimationSettings>(
     AnimationSettingsService.getSettings()
+  );
+  const [technicalSettings, setTechnicalSettings] = useState<TechnicalSettings>(
+    TechnicalSettingsService.getSettings()
   );
 
   const handleAnimationSettingChange = (
@@ -30,11 +34,23 @@ export const SettingsMenu: React.FC = () => {
     AnimationSettingsService.saveSettings(newSettings);
   };
 
+  const handleTechnicalSettingChange = (
+    key: keyof TechnicalSettings,
+    value: boolean
+  ) => {
+    const newSettings = { ...technicalSettings, [key]: value };
+    setTechnicalSettings(newSettings);
+    TechnicalSettingsService.saveSettings(newSettings);
+  };
+
   const resetAll = () => {
     setTheme("light");
     const newAnimationSettings = { enableWelcomeAnimation: false };
     setAnimationSettings(newAnimationSettings);
     AnimationSettingsService.saveSettings(newAnimationSettings);
+    const newTechnicalSettings = { enableSandboxProtection: false };
+    setTechnicalSettings(newTechnicalSettings);
+    TechnicalSettingsService.saveSettings(newTechnicalSettings);
     try {
       localStorage.removeItem("theme");
     } catch {}
@@ -99,12 +115,15 @@ export const SettingsMenu: React.FC = () => {
                     </button>
                   </div>
                 </div>
-                <div className="mt-3 grid grid-cols-2 gap-2 sm:hidden">
+                <div className="mt-3 grid grid-cols-3 gap-2 sm:hidden">
                   <button onClick={() => setTab('theme')} className={`flex items-center justify-center gap-2 px-3 py-2 rounded-xl border text-sm text-gray-700 dark:text-gray-200 ${tab==='theme'? 'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600' : 'border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800'}`}>
                     <Moon className="w-4 h-4"/> Theme
                   </button>
                   <button onClick={() => setTab('visuals')} className={`flex items-center justify-center gap-2 px-3 py-2 rounded-xl border text-sm text-gray-700 dark:text-gray-200 ${tab==='visuals'? 'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600' : 'border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800'}`}>
                     <Wand2 className="w-4 h-4"/> Visuals
+                  </button>
+                  <button onClick={() => setTab('technical')} className={`flex items-center justify-center gap-2 px-3 py-2 rounded-xl border text-sm text-gray-700 dark:text-gray-200 ${tab==='technical'? 'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600' : 'border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800'}`}>
+                    <Settings className="w-4 h-4"/> Technical
                   </button>
                 </div>
               </div>
@@ -117,6 +136,9 @@ export const SettingsMenu: React.FC = () => {
                     </button>
                     <button onClick={() => setTab('visuals')} className={`flex items-center gap-2 px-3 py-2 rounded-xl border text-sm text-gray-700 dark:text-gray-200 ${tab==='visuals'? 'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600' : 'border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800'}`}>
                       <Wand2 className="w-4 h-4"/> Visuals
+                    </button>
+                    <button onClick={() => setTab('technical')} className={`flex items-center gap-2 px-3 py-2 rounded-xl border text-sm text-gray-700 dark:text-gray-200 ${tab==='technical'? 'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600' : 'border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800'}`}>
+                      <Settings className="w-4 h-4"/> Technical
                     </button>
                   </div>
                   <div>
@@ -147,6 +169,26 @@ export const SettingsMenu: React.FC = () => {
                               type="checkbox"
                               checked={animationSettings.enableWelcomeAnimation}
                               onChange={(e) => handleAnimationSettingChange('enableWelcomeAnimation', e.target.checked)}
+                              className="h-5 w-5 rounded border-gray-300 text-[var(--grad-from)] focus:ring-blue-500"
+                            />
+                          </label>
+                        </div>
+                      </div>
+                    )}
+
+                    {tab === 'technical' && (
+                      <div className="space-y-4">
+                        <div className="text-sm font-semibold text-gray-700 dark:text-white mb-4">Technical Settings</div>
+                        <div className="space-y-6">
+                          <label className="flex items-center justify-between">
+                            <div>
+                              <span className="text-sm text-gray-700 dark:text-gray-300">Sandbox Protection</span>
+                              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Enable sandbox for all player embeds</p>
+                            </div>
+                            <input
+                              type="checkbox"
+                              checked={technicalSettings.enableSandboxProtection}
+                              onChange={(e) => handleTechnicalSettingChange('enableSandboxProtection', e.target.checked)}
                               className="h-5 w-5 rounded border-gray-300 text-[var(--grad-from)] focus:ring-blue-500"
                             />
                           </label>

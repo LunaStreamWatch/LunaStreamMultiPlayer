@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, ChevronDown } from 'lucide-react';
+import { TechnicalSettingsService } from '../services/technicalSettings';
 
 interface PlayerSelectorProps {
   tmdbId: string | number;
@@ -10,7 +11,7 @@ interface PlayerSelectorProps {
   onClose: () => void;
 }
 
-type PlayerType = 'videasy' | 'vidify' | 'vidplus' | 'vidfast' | 'mapple' | 'vidzee' | 'vidora' | 'vidlink' | 'vidrock' | 'autoembed' | 'vidsrc' | 'smashystream' | 'moviesapi' | 'letsembed' | 'vidplay' | 'vidnest' | 'cinemaos' | 'spenembed' | 'vidking' | '111movies';
+type PlayerType = 'videasy' | 'vidify' | 'vidplus' | 'vidfast' | 'mapple' | 'vidsrc.cc' | 'vidsrc.xyz' | 'vidzee' | 'vidora' | 'vidlink' | 'vidrock' | 'autoembed' | 'smashystream' | 'moviesapi' | 'letsembed' | 'vidplay' | 'vidnest' | 'cinemaos' | 'spenembed' | 'vidking' | '111movies';
 
 const PlayerSelector: React.FC<PlayerSelectorProps> = ({
   tmdbId,
@@ -22,6 +23,7 @@ const PlayerSelector: React.FC<PlayerSelectorProps> = ({
 }) => {
   const [selectedPlayer, setSelectedPlayer] = useState<PlayerType>('videasy');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [technicalSettings, setTechnicalSettings] = useState(TechnicalSettingsService.getSettings());
 
   const players = [
     { id: 'videasy' as PlayerType, name: 'Videasy' },
@@ -29,12 +31,13 @@ const PlayerSelector: React.FC<PlayerSelectorProps> = ({
     { id: 'vidplus' as PlayerType, name: 'VidPlus' },
     { id: 'vidfast' as PlayerType, name: 'VidFast' },
     { id: 'mapple' as PlayerType, name: 'Mapple' },
+    { id: 'vidsrc.cc' as PlayerType, name: 'vidsrc.cc' },
+    { id: 'vidsrc.xyz' as PlayerType, name: 'vidsrc.xyz' },
     { id: 'vidzee' as PlayerType, name: 'VidZee' },
     { id: 'vidora' as PlayerType, name: 'Vidora' },
     { id: 'vidlink' as PlayerType, name: 'VidLink' },
     { id: 'vidrock' as PlayerType, name: 'VidRock' },
     { id: 'autoembed' as PlayerType, name: 'AutoEmbed' },
-    { id: 'vidsrc' as PlayerType, name: 'VidSrc' },
     { id: 'smashystream' as PlayerType, name: 'SmashyStream' },
     { id: 'moviesapi' as PlayerType, name: 'MoviesAPI' },
     { id: 'letsembed' as PlayerType, name: 'LetsEmbed' },
@@ -110,8 +113,10 @@ const PlayerSelector: React.FC<PlayerSelectorProps> = ({
           return `https://vidrock.net/movie/${tmdbId}?theme=${color}&autoplay=false&autonext=true&download=true&nextbutton=true`;
         case 'autoembed':
           return `https://player.autoembed.cc/embed/movie/${tmdbId}`;
-        case 'vidsrc':
-          return `https://vidsrc.xyz/embed/movie/${tmdbId}?autoplay=1`;
+        case 'vidsrc.cc':
+           return `https://vidsrc.cc/v3/embed/movie/${tmdbId}?poster=1&autoPlay=false`;
+        case 'vidsrc.xyz':
+           return `https://vidsrc.xyz/embed/movie/${tmdbId}?autoplay=1`;
         case 'smashystream':
           return `https://player.smashy.stream/movie/${tmdbId}`;
         case 'moviesapi':
@@ -155,8 +160,10 @@ const PlayerSelector: React.FC<PlayerSelectorProps> = ({
           return `https://vidrock.net/tv/${tmdbId}/${season}/${episode}?theme=${color}&autoplay=false&autonext=true&download=true&nextbutton=true`;
         case 'autoembed':
           return `https://player.autoembed.cc/embed/tv/${tmdbId}/${season}/${episode}`;
-        case 'vidsrc':
-          return `https://vidsrc.xyz/embed/tv/${tmdbId}/${season}-${episode}?autoplay=1&autonext=1`;
+        case 'vidsrc.cc':
+           return `https://vidsrc.cc/v3/embed/tv/${tmdbId}/${season}/${episode}?poster=1&autoPlay=false`;
+        case 'vidsrc.xyz':
+           return `https://vidsrc.xyz/embed/tv/${tmdbId}/${season}-${episode}?autoplay=1&autonext=1`;
         case 'smashystream':
           return `https://player.smashy.stream/tv/${tmdbId}/${season}/${episode}`;
         case 'moviesapi':
@@ -231,6 +238,7 @@ const PlayerSelector: React.FC<PlayerSelectorProps> = ({
         title={title}
         allowFullScreen
         allow="encrypted-media"
+        sandbox={technicalSettings.enableSandboxProtection ? "allow-scripts allow-same-origin allow-presentation" : undefined}
       />
     </div>
   );
