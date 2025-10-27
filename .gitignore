@@ -28,3 +28,5 @@ bank/
 app/
 electron-dist/
 .env
+
+lsmp.zip
