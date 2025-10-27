@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Search, TrendingUp } from "lucide-react"
+import { Search, TrendingUp, Film } from "lucide-react"
 import { useNavigate, useParams, Link } from "react-router-dom"
 
 import { tmdb } from "../services/tmdb"
@@ -134,7 +134,9 @@ const HomePage: React.FC = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2 group">
               <div className="w-8 h-8 bg-gradient-to-r from-red-600 to-red-500 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
-                <Film className="w-5 h-5 text-white" />
+                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
               </div>
               <span className="text-xl font-bold text-white">
                 LunaStream
