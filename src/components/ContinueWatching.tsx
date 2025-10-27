@@ -112,18 +112,18 @@ const ContinueWatching: React.FC = () => {
   return (
     <div className="mb-12">
       <div className="flex items-center justify-between mb-6">
-        <h2 className={`font-bold text-gray-900 dark:text-white transition-colors duration-300 ${isMobile ? 'text-xl' : 'text-3xl'}`}>
-          <Clock className={`inline mr-3 text-[var(--grad-from)] ${isMobile ? 'w-6 h-6' : 'w-8 h-8'}`} />
-          {t.continue_watching || 'Continue Watching'}
+        <h2 className={`font-bold text-white ${isMobile ? 'text-xl' : 'text-3xl'}`}>
+          <Clock className={`inline mr-3 text-red-500 ${isMobile ? 'w-6 h-6' : 'w-8 h-8'}`} />
+          Continue Watching
         </h2>
         <button
           onClick={async () => {
             await continueWatchingService.clearAll();
             loadItems();
           }}
-          className="text-sm text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors"
+          className="text-sm text-gray-400 hover:text-red-400 transition-colors"
         >
-          {t.clear_all || 'Clear All'}
+          Clear All
         </button>
       </div>
 
@@ -131,7 +131,7 @@ const ContinueWatching: React.FC = () => {
         {items.map((item) => (
           <div
             key={item.id}
-            className="group block bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-pink-200/50 dark:border-gray-700/50 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
+            className="group block bg-gray-800/50 backdrop-blur-sm rounded-lg overflow-hidden hover:bg-gray-700/50 transition-all duration-300 hover:scale-105 cursor-pointer"
             onClick={() => handleContinueWatching(item)}
           >
             {/* Poster */}
@@ -163,7 +163,7 @@ const ContinueWatching: React.FC = () => {
               {/* Remove Button */}
               <button
                 onClick={(e) => handleRemoveItem(e, item.id)}
-                className="absolute top-2 right-2 w-8 h-8 bg-red-500/90 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-lg"
+                className="absolute top-2 right-2 w-8 h-8 bg-red-600/90 hover:bg-red-700 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-lg"
                 title="Remove from continue watching"
               >
                 <X className="w-4 h-4" />
@@ -172,12 +172,12 @@ const ContinueWatching: React.FC = () => {
               {/* Type Badge */}
               <div className="absolute top-2 left-2">
                 <span className={`px-2 py-1 rounded-full text-xs font-medium text-white ${
-                  item.type === 'movie' ? 'bg-[var(--grad-from)]/90' : 
-                  item.type === 'tv' ? 'bg-purple-500/90' : 
-                  'bg-indigo-500/90'
+                  item.type === 'movie' ? 'bg-red-600/90' :
+                  item.type === 'tv' ? 'bg-blue-600/90' :
+                  'bg-indigo-600/90'
                 }`}>
-                  {item.type === 'movie' ? t.content_movie_singular : 
-                   item.type === 'tv' ? t.content_tv_singular : 
+                  {item.type === 'movie' ? 'Movie' :
+                   item.type === 'tv' ? 'TV Show' :
                    'Anime'}
                 </span>
               </div>
@@ -185,34 +185,34 @@ const ContinueWatching: React.FC = () => {
 
             {/* Content */}
             <div className="p-4">
-              <h3 className="font-semibold text-gray-900 dark:text-white text-sm mb-2 line-clamp-2 group-hover:text-[var(--grad-from)] dark:group-hover:text-[var(--grad-from)] transition-colors">
+              <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2 group-hover:text-red-400 transition-colors">
                 {item.title}
               </h3>
-              
+
               {/* Episode/Season Info */}
               {item.type === 'tv' && item.season && item.episode && (
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                <p className="text-xs text-gray-400 mb-2">
                   S{item.season}E{item.episode}
                   {item.episodeTitle && `: ${item.episodeTitle}`}
                 </p>
               )}
-              
+
               {item.type === 'anime' && item.episode && (
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                <p className="text-xs text-gray-400 mb-2">
                   Episode {item.episode} {item.isDub ? '(Dub)' : '(Sub)'}
                 </p>
               )}
 
               {/* Progress and Time */}
-              <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+              <div className="flex items-center justify-between text-xs text-gray-400">
                 <div className="flex items-center space-x-1">
                   <Clock className="w-3 h-3" />
                   <span>{formatLastWatched(item.lastWatched)}</span>
                 </div>
                 {item.progress && (
                   <div className="flex items-center space-x-1">
-                    <Play className="w-3 h-3 text-[var(--grad-from)]" />
-                    <span className="text-[var(--grad-from)] dark:text-[var(--grad-from)] font-medium">{formatProgress(item.progress)}</span>
+                    <Play className="w-3 h-3 text-red-500" />
+                    <span className="text-red-500 font-medium">{formatProgress(item.progress)}</span>
                   </div>
                 )}
               </div>

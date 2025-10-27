@@ -1,21 +1,21 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
-import { useParams, Link } from "react-router-dom"
-import { Play, Star, Calendar, Clock, Film, X, Heart, Eye, EyeOff, ChevronDown, Tv, Info, List, Grid2x2 as Grid, ChevronLeft } from "lucide-react"
+import { useParams, Link, useNavigate } from "react-router-dom"
+import { Play, Star, Calendar, Clock, Film, X, Heart, Eye, EyeOff, ChevronDown, Tv, Info, List, Grid2x2 as Grid, ChevronLeft, Search } from "lucide-react"
 import { tmdb } from "../services/tmdb"
 import type { TVDetails, Episode } from "../types"
 import { watchlistService } from "../services/watchlist"
 import { continueWatchingService } from "../services/continueWatching"
-import GlobalNavbar from "./GlobalNavbar"
 import Loading from "./Loading"
 import { useIsMobile } from "../hooks/useIsMobile"
-import HybridTVHeader from "./HybridTVHeader"
 import PlayerSelector from "./PlayerSelector"
+import SettingsMenu from "./SettingsMenu"
 
 
 const TVDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>()
+  const navigate = useNavigate()
   const [show, setShow] = useState<TVDetails | null>(null)
   const [selectedSeason, setSelectedSeason] = useState(1)
   const [episodes, setEpisodes] = useState<Episode[]>([])
@@ -294,85 +294,160 @@ const TVDetail: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-pink-50 to-slate-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
-      <GlobalNavbar />
+    <div className="min-h-screen bg-black">
+      {/* Netflix-style Header */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-md border-b border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link to="/" className="flex items-center space-x-2 group">
+              <div className="w-8 h-8 bg-gradient-to-r from-red-600 to-red-500 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
+                <Film className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-bold text-white">
+                LunaStream
+              </span>
+            </Link>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mobile-spacing">
-        {/* Hybrid TV Header */}
-        <div className="mb-8">
-          <Link
-            to={`/`}
-            className="text-[var(--grad-from)] dark:text-[var(--grad-from)] hover:underline ml-1"
-          >
-            <ChevronLeft />
-          </Link>
-          <HybridTVHeader
-            show={show}
-            selectedSeason={selectedSeason}
-            onSeasonChange={setSelectedSeason}
-            isFavorited={isFavorited}
-            onToggleFavorite={toggleFavorite}
-          />
-        </div>
+            {/* Navigation Links */}
+            <div className="hidden md:flex items-center space-x-8">
+              <Link to="/" className="text-white hover:text-gray-300 transition-colors">Home</Link>
+              <Link to="/search" className="text-white hover:text-gray-300 transition-colors">Search</Link>
+              <Link to="/vault" className="text-white hover:text-gray-300 transition-colors">My List</Link>
+            </div>
 
-        {/* Cast Overview */}
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm mobile-card rounded-2xl shadow-xl border border-purple-200/50 dark:border-gray-700/50 overflow-hidden mb-8 transition-colors duration-300">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white px-8 pt-8 mb-4">Cast Overview</h2>
-          <div className="flex flex-wrap gap-6 px-8 pb-8">
-            {loading ? (
-              <p className="text-gray-700 dark:text-gray-300">Loading cast...</p>
-            ) : ((seasonCast.length > 0 ? seasonCast : cast).length === 0 ? (
-              <p className="text-gray-700 dark:text-gray-300">No cast information available.</p>
-            ) : (
-              (seasonCast.length > 0 ? seasonCast : cast).slice(0, 12).map((actor: any) => (
-                <div key={actor.id} className="flex-shrink-0 w-28 text-center">
-                  <img
-                    src={
-                      actor.profile_path
-                        ? tmdb.getImageUrl(actor.profile_path, "w185")
-                        : (() => {
-                            if (actor.gender === 1) return "/female.png"
-                            if (actor.gender === 2) return "/male.png"
-                            return "/unknown.png"
-                          })()
-                    }
-                    alt={actor.name}
-                    className="w-28 h-28 object-cover rounded-full shadow-md mb-2 border border-gray-300 dark:border-gray-600"
-                  />
-                  <p className="text-sm font-medium text-gray-800 dark:text-gray-200 truncate">{actor.name}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{actor.character}</p>
-                </div>
-              ))
-            ))}
-          </div>
-        </div>
-
-        {/* Comments Section removed */}
-
-        {/* Season Selector & Episodes */}
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm mobile-card rounded-2xl shadow-xl border border-pink-200/50 dark:border-gray-700/50 p-4 sm:p-6 transition-colors duration-300 mt-8">
-          {/* Adjust layout for mobile */}
-          <div className={`flex items-center justify-between mb-6 ${isMobile ? "flex-col space-y-4" : ""}`}>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
-              Episodes
-            </h2>
-            <div className={`flex items-center space-x-3 ${isMobile ? "w-full justify-center" : ""}`}>
-              {/* Season View Button */}
-              <Link
-                to={`/tv/${id}/season/${selectedSeason}`}
-                className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-4 py-2 rounded-xl font-semibold hover:from-indigo-600 hover:to-purple-700 transition-colors flex items-center space-x-2 shadow-lg"
+            {/* Action Buttons */}
+            <div className="flex items-center space-x-4">
+              {/* Search Button */}
+              <button
+                onClick={() => navigate('/search')}
+                className="text-white hover:text-gray-300 transition-colors p-2"
               >
-                <List className="w-4 h-4" />
-                <span>{isMobile ? 'Season' : 'View Season'}</span>
+                <Search className="w-5 h-5" />
+              </button>
+
+              {/* Donate Button */}
+              <Link
+                to="/donate"
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-medium transition-colors"
+              >
+                Donate
               </Link>
 
-            {/* Season Selector */}
-            {show?.seasons && show.seasons.length > 0 && (
-                <div className="relative group">
+              {/* Discord Button */}
+              <a
+                href="https://discord.gg/lunastream"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-gray-300 transition-colors p-2"
+                title="Join Discord"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 1 0-.008.128 10.2 10.2 0 0 0 .372.292 10.302 10.302 0 0 0 11.293.009.077.077 0 0 0-.01-.125c-.597-.205-1.253-.462-1.872-.892a.077.077 0 0 1-.045-.106c.253-.561.548-1.114 1.226-1.994a.076.076 0 0 0 .084-.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+              </a>
+
+              {/* Settings Menu */}
+              <SettingsMenu />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative pt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Back Button */}
+          <Link to="/" className="inline-flex items-center text-gray-400 hover:text-white transition-colors mb-6">
+            <ChevronLeft className="w-5 h-5 mr-2" />
+            Back to Home
+          </Link>
+
+          {/* TV Show Header */}
+          <div className="mb-8">
+            <div className="flex flex-col lg:flex-row gap-8">
+              {/* Poster */}
+              <div className="flex-shrink-0">
+                <img
+                  src={tmdb.getImageUrl(show.poster_path, "w500") || "/placeholder.svg"}
+                  alt={show.name}
+                  className="w-64 h-96 object-cover rounded-lg shadow-2xl"
+                />
+              </div>
+
+              {/* Show Info */}
+              <div className="flex-1">
+                <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
+                  {show.name}
+                </h1>
+
+                <div className="flex items-center space-x-4 mb-6">
+                  <span className="text-green-400 font-semibold">
+                    {Math.round(show.vote_average * 10)}% Match
+                  </span>
+                  <span className="text-gray-400">
+                    {new Date(show.first_air_date).getFullYear()}
+                  </span>
+                  <span className="text-gray-400">
+                    {show.number_of_seasons} Season{show.number_of_seasons !== 1 ? 's' : ''}
+                  </span>
+                  <div className="flex items-center space-x-1">
+                    <span className="text-yellow-500">★</span>
+                    <span className="text-white">{show.vote_average.toFixed(1)}</span>
+                  </div>
+                </div>
+
+                <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                  {show.overview}
+                </p>
+
+                {/* Genres */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {show.genres?.map((genre) => (
+                    <span
+                      key={genre.id}
+                      className="px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-sm"
+                    >
+                      {genre.name}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex items-center space-x-4">
+                  <button
+                    onClick={() => handleWatchEpisode(episodes[0])}
+                    className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+                  >
+                    <Play className="w-5 h-5" />
+                    <span>Play</span>
+                  </button>
+
+                  <button
+                    onClick={toggleFavorite}
+                    className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-semibold transition-colors ${
+                      isFavorited
+                        ? 'bg-gray-700 text-white'
+                        : 'bg-gray-800 hover:bg-gray-700 text-white'
+                    }`}
+                  >
+                    <Heart className={`w-5 h-5 ${isFavorited ? 'fill-current text-red-500' : ''}`} />
+                    <span>{isFavorited ? 'In My List' : 'Add to My List'}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Season Selector */}
+          <div className="mb-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-white">Episodes</h2>
+              {show?.seasons && show.seasons.length > 0 && (
+                <div className="relative">
                   <select
                     value={selectedSeason}
                     onChange={(e) => setSelectedSeason(Number(e.target.value))}
-                    className="pr-10 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-xl border border-pink-200/50 dark:border-gray-600/30 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 appearance-none py-2 px-4 cursor-pointer font-semibold"
+                    className="bg-gray-800 text-white px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
                     {show.seasons
                       .filter((season: any) => season.season_number > 0)
@@ -382,7 +457,6 @@ const TVDetail: React.FC = () => {
                         </option>
                       ))}
                   </select>
-                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 dark:text-gray-400 pointer-events-none transition-transform duration-200 group-hover:rotate-180" />
                 </div>
               )}
             </div>
@@ -390,76 +464,62 @@ const TVDetail: React.FC = () => {
 
           {/* Episodes List */}
           {episodesLoading ? (
-            <div className={`text-center ${isMobile ? 'py-6' : 'py-8'}`}>
-              <div className="w-12 h-12 bg-gradient-to-r from-[var(--grad-from)] to-[var(--grad-to)] rounded-full animate-spin flex items-center justify-center mx-auto mb-4">
-                <Tv className="w-6 h-6 text-white" />
+            <div className="text-center py-16">
+              <div className="w-16 h-16 bg-red-600 rounded-full animate-spin flex items-center justify-center mb-4 shadow-lg mx-auto">
+                <Tv className="w-8 h-8 text-white" />
               </div>
-              <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">
+              <p className="text-gray-400 text-lg">
                 Loading episodes...
               </p>
             </div>
           ) : (
-            <div className={isMobile ? 'space-y-2' : 'space-y-3'}>
+            <div className="space-y-4">
               {episodes.map((episode) => (
                 <div
                   key={episode.id}
-                  className={`group bg-gradient-to-br from-pink-50 to-purple-50 dark:from-gray-700 dark:to-gray-600 border border-pink-200/50 dark:border-gray-600/50 overflow-hidden hover:shadow-lg transition-all duration-300 ${isMobile ? 'rounded-lg' : 'rounded-xl'}`}
+                  className="bg-gray-900/50 backdrop-blur-sm rounded-lg p-6 hover:bg-gray-800/50 transition-colors"
                 >
-                  <div className={isMobile ? 'p-3' : 'p-4'}>
-                    <>
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center space-x-3">
-                          <span className="bg-gradient-to-r from-[var(--grad-from)] to-[var(--grad-to)] text-white px-3 py-1 rounded-full text-sm font-semibold">
-                            {episode.episode_number}
-                          </span>
-                          <h3 className={`font-semibold ${isMobile ? 'text-sm' : 'text-base'} text-gray-900 dark:text-white group-hover:text-[var(--grad-from)] dark:group-hover:text-[var(--grad-from)] transition-colors`}>
-                            {episode.name}
-                          </h3>
-                        </div>
-                        <div className={`flex items-center space-x-2 ${isMobile ? 'flex-col' : ''}`}>
-                          <Link
-                            to={`/tv/${id}/season/${episode.season_number}/episode/${episode.episode_number}`}
-                            className="text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors p-1"
-                            title="View Episode Details"
-                          >
-                            <Grid className="w-5 h-5" />
-                          </Link>
-                          {episode.overview && (
-                            <button
-                              onClick={() => toggleDescription(episode.id)}
-                              className="text-gray-500 dark:text-gray-400 hover:text-[var(--grad-from)] dark:hover:text-[var(--grad-from)] transition-colors p-1"
-                              title='Show episode info'
-                            >
-                              <Info className="w-5 h-5" />
-                            </button>
-                          )}
-                          <button
-                            onClick={() => handleWatchEpisode(episode)}
-                            className="bg-gradient-to-r from-[var(--grad-from)] to-[var(--grad-to)] text-white px-3 py-1 rounded-lg font-semibold hover:from-pink-600 hover:to-purple-700 transition-colors flex items-center space-x-2"
-                            title='Watch'
-                          >
-                            <Play className="w-4 h-4" />
-                            <span>Watch</span>
-                          </button>
-                        </div>
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-4 mb-3">
+                        <span className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          {episode.episode_number}
+                        </span>
+                        <h3 className="text-xl font-semibold text-white">
+                          {episode.name}
+                        </h3>
                       </div>
-                      {showDescriptions[episode.id] && (
-                        <div className="mt-3 p-3 bg-white/60 dark:bg-gray-800/60 rounded-lg border border-pink-200/30 dark:border-gray-600/30 transition-colors duration-300">
-                          {episode.air_date && (
-                            <div className="flex items-center text-sm text-gray-600 dark:text-gray-300 mb-2 transition-colors duration-300">
-                              <Calendar className="w-4 h-4 mr-2" />
-                              <span className="font-medium">Aired</span>
-                              <span className="ml-1">{formatAirDate(episode.air_date)}</span>
-                            </div>
-                          )}
-                          {episode.overview && (
-                            <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed transition-colors duration-300">
-                              {episode.overview}
-                            </p>
-                          )}
+
+                      {episode.air_date && (
+                        <div className="flex items-center text-sm text-gray-400 mb-3">
+                          <Calendar className="w-4 h-4 mr-2" />
+                          <span>{formatAirDate(episode.air_date)}</span>
                         </div>
                       )}
-                    </>
+
+                      {episode.overview && (
+                        <p className="text-gray-300 leading-relaxed">
+                          {episode.overview}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="flex items-center space-x-3 ml-6">
+                      <Link
+                        to={`/tv/${id}/season/${episode.season_number}/episode/${episode.episode_number}`}
+                        className="text-gray-400 hover:text-white transition-colors p-2"
+                        title="View Episode Details"
+                      >
+                        <Info className="w-5 h-5" />
+                      </Link>
+                      <button
+                        onClick={() => handleWatchEpisode(episode)}
+                        className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors flex items-center space-x-2"
+                      >
+                        <Play className="w-4 h-4" />
+                        <span>Watch</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
