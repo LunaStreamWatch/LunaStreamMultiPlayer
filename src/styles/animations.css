@@ -19,10 +19,19 @@
   to { opacity: 0; }
 }
 
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .animate-particle {
   animation: particle 2s ease-out forwards;
 }
 
 .animate-fade-out {
   animation: fade-out 0.5s ease-out forwards;
+}
+
+.animate-spin-slow {
+  animation: spin 8s linear infinite;
 }

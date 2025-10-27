@@ -11,7 +11,7 @@ interface PlayerSelectorProps {
   onClose: () => void;
 }
 
-type PlayerType = 'videasy' | 'vidify' | 'vidplus' | 'vidfast' | 'mapple' | 'vidsrc.cc' | 'vidsrc.xyz' | 'vidzee' | 'vidora' | 'vidlink' | 'vidrock' | 'autoembed' | 'smashystream' | 'moviesapi' | 'letsembed' | 'vidplay' | 'vidnest' | 'cinemaos' | 'spenembed' | 'vidking' | '111movies';
+type PlayerType = 'videasy' | 'vidify' | 'vidplus' | 'vidfast' | 'mapple' | 'vidsrc.cc' | 'vidsrc.xyz' | 'vidzee' | 'vidora' | 'vidlink' | 'vidrock' | 'autoembed' | 'smashystream' | 'moviesapi' | 'letsembed' | 'vidplay' | 'vidnest' | 'cinemaos' | 'spenembed' | 'vidking' | '111movies' | 'vixsrc' | 'vidsrc.cx';
 
 const PlayerSelector: React.FC<PlayerSelectorProps> = ({
   tmdbId,
@@ -46,7 +46,9 @@ const PlayerSelector: React.FC<PlayerSelectorProps> = ({
     { id: 'cinemaos' as PlayerType, name: 'CinemaOS' },
     { id: 'spenembed' as PlayerType, name: 'SpenEmbed' },
     { id: 'vidking' as PlayerType, name: 'VidKing' },
-    { id: '111movies' as PlayerType, name: '111Movies' }
+    { id: '111movies' as PlayerType, name: '111Movies' },
+    { id: 'vixsrc' as PlayerType, name: 'VixSrc' },
+    { id: 'vidsrc.cx' as PlayerType, name: 'Vidsrc.cx' }
   ];
 
   useEffect(() => {
@@ -135,6 +137,10 @@ const PlayerSelector: React.FC<PlayerSelectorProps> = ({
           return `https://www.vidking.net/embed/movie/${tmdbId}?color=${color}&autoPlay=true`;
         case '111movies':
           return `https://111movies.com/movie/${tmdbId}`;
+        case 'vixsrc':
+          return `https://vixsrc.to/movie/${tmdbId}?primaryColor=B20710&secondaryColor=170000&autoplay=false&startAt=0&lang=en`;
+        case 'vidsrc.cx':
+          return `https://vidsrc.cx/embed/movie/${tmdbId}`;
         default:
           return `https://player.videasy.net/movie/${tmdbId}?color=${color}&chromecast=false`;
       }
@@ -182,6 +188,10 @@ const PlayerSelector: React.FC<PlayerSelectorProps> = ({
           return `https://www.vidking.net/embed/tv/${tmdbId}/${season}/${episode}?color=${color}&autoPlay=true&nextEpisode=true&episodeSelector=true`;
         case '111movies':
           return `https://111movies.com/tv/${tmdbId}/${season}/${episode}`;
+        case 'vixsrc':
+          return `https://vixsrc.to/tv/${tmdbId}/${season}/${episode}?primaryColor=B20710&secondaryColor=170000&autoplay=false&startAt=0&lang=en`;
+        case 'vidsrc.cx':
+          return `https://vidsrc.cx/embed/tv/${tmdbId}/${season}/${episode}`;
         default:
           return `https://player.videasy.net/tv/${tmdbId}/${season}/${episode}?color=${color}&chromecast=false`;
       }
